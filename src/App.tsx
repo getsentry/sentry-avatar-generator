@@ -6,6 +6,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "./components/ui/scroll-area";
 import { useState } from "react";
 import Hair, { HairColor } from "./components/avatar/hair";
+import AvatarGridOptions from "./components/editor/avatar-grid-options";
+import domtoimage from "dom-to-image";
+import { Button } from "./components/ui/button";
+import { saveAs } from "file-saver";
 
 function App() {
   const [face, setFace] = useState(0);
@@ -14,14 +18,23 @@ function App() {
   const [hairColor, setHairColor] = useState<HairColor>("black");
   const hairColors: HairColor[] = ["black", "blonde", "brown", "red"];
 
+  const onDownload = () => {
+    domtoimage
+      .toBlob(document.getElementById("avatar-preview")!)
+      .then(function (blob) {
+        saveAs(blob, "my-node.png");
+      });
+  };
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="container max-w-screen-xl mt-10">
         <div className="flex flex-wrap justify-center">
           <div className="basis-2/3 sm:basis-1/3 pb-5 sm:pr-5">
-            <AvatarPreview>
+            <AvatarPreview id="avatar-preview">
               <SentryAvatar config={{ face, hairColor }} />
             </AvatarPreview>
+            <Button onClick={() => onDownload()}>Download</Button>
           </div>
 
           <div className="basis-full sm:basis-2/3">
@@ -42,31 +55,19 @@ function App() {
               </ScrollArea>
 
               <TabsContent value="face">
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                  {faces.map(function (face) {
-                    return (
-                      <button onClick={() => setFace(face)}>
-                        <div className="bg-slate-900 rounded">
-                          <Face i={face} />
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                <AvatarGridOptions
+                  values={faces}
+                  setValue={setFace}
+                  render={(face) => <Face i={face} />}
+                />
               </TabsContent>
 
               <TabsContent value="hair">
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                  {hairColors.map(function (hairColor) {
-                    return (
-                      <button onClick={() => setHairColor(hairColor)}>
-                        <div className="bg-slate-900 rounded">
-                          <Hair color={hairColor} />
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                <AvatarGridOptions
+                  values={hairColors}
+                  setValue={setHairColor}
+                  render={(hairColor) => <Hair color={hairColor} />}
+                />
               </TabsContent>
             </Tabs>
           </div>
