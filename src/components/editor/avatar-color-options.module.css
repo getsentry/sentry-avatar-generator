@@ -1,0 +1,20 @@
+.color-picker {
+    background: conic-gradient(
+        from 180deg,
+        red,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        magenta,
+        red
+    );
+    position: relative;
+}
+
+.color-picker::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, white, transparent);
+}

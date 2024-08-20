@@ -10,6 +10,7 @@ import AvatarGridOptions from "./components/editor/avatar-grid-options";
 import domtoimage from "dom-to-image";
 import { Button } from "./components/ui/button";
 import { saveAs } from "file-saver";
+import AvatarColorOptions from "./components/editor/avatar-color-options";
 
 function App() {
   const [face, setFace] = useState(0);
@@ -17,6 +18,16 @@ function App() {
 
   const [hairColor, setHairColor] = useState<HairColor>("black");
   const hairColors: HairColor[] = ["black", "blonde", "brown", "red"];
+
+  const [hairColorNew, setHairColorNew] = useState<string>("black");
+  const hairColorsNewList: string[] = [
+    "#FDFAF3",
+    "#F2E39F",
+    "#D87436",
+    "#9F4112",
+    "#4F2210",
+    "#0E0705",
+  ];
 
   const onDownload = () => {
     domtoimage
@@ -38,38 +49,47 @@ function App() {
           </div>
 
           <div className="basis-full sm:basis-2/3">
-            <Tabs defaultValue="face">
-              <ScrollArea className="bg-muted rounded-md">
-                <div className="w-0">
-                  <TabsList className="bg-transparent">
-                    <TabsTrigger value="face">Face</TabsTrigger>
-                    <TabsTrigger value="hair">Hair</TabsTrigger>
-                    <TabsTrigger value="eyes">Eyes</TabsTrigger>
-                    <TabsTrigger value="nose">Nose</TabsTrigger>
-                    <TabsTrigger value="mouth">Mouth</TabsTrigger>
-                    <TabsTrigger value="facial">Facial</TabsTrigger>
-                    <TabsTrigger value="accessories">Accessories</TabsTrigger>
-                  </TabsList>
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
+            <div className="bg-card rounded-lg pt-2 pb-3">
+              <Tabs defaultValue="face">
+                <ScrollArea>
+                  <div className="w-0">
+                    <TabsList className="bg-transparent p-0 px-3 m-0">
+                      <TabsTrigger value="face">Face</TabsTrigger>
+                      <TabsTrigger value="hair">Hair</TabsTrigger>
+                      <TabsTrigger value="eyes">Eyes</TabsTrigger>
+                      <TabsTrigger value="nose">Nose</TabsTrigger>
+                      <TabsTrigger value="mouth">Mouth</TabsTrigger>
+                      <TabsTrigger value="facial">Facial</TabsTrigger>
+                      <TabsTrigger value="accessories">Accessories</TabsTrigger>
+                    </TabsList>
+                  </div>
+                  <ScrollBar orientation="horizontal" />
+                </ScrollArea>
 
-              <TabsContent value="face">
-                <AvatarGridOptions
-                  values={faces}
-                  setValue={setFace}
-                  render={(face) => <Face i={face} />}
-                />
-              </TabsContent>
+                <TabsContent value="face">
+                  <AvatarGridOptions
+                    values={faces}
+                    currentValue={face}
+                    setValue={setFace}
+                    render={(face) => <Face i={face} />}
+                  />
+                </TabsContent>
 
-              <TabsContent value="hair">
-                <AvatarGridOptions
-                  values={hairColors}
-                  setValue={setHairColor}
-                  render={(hairColor) => <Hair color={hairColor} />}
-                />
-              </TabsContent>
-            </Tabs>
+                <TabsContent value="hair" className="space-y-3">
+                  <AvatarGridOptions
+                    values={hairColors}
+                    currentValue={hairColor}
+                    setValue={setHairColor}
+                    render={(hairColor) => <Hair color={hairColor} />}
+                  />
+                  <AvatarColorOptions
+                    colors={hairColorsNewList}
+                    currentColor={hairColorNew}
+                    setColor={setHairColorNew}
+                  />
+                </TabsContent>
+              </Tabs>
+            </div>
           </div>
         </div>
       </div>
