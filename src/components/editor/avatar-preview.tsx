@@ -8,7 +8,7 @@ function AvatarPreview({
   children: React.ReactNode;
 }) {
   return (
-    <div id={id} className="overflow-hidden w-full bg-violet-600 rounded-full">
+    <div id={id} className="h-full w-full">
       {children}
     </div>
   );

@@ -11,6 +11,18 @@ import domtoimage from "dom-to-image";
 import { Button } from "./components/ui/button";
 import { saveAs } from "file-saver";
 import AvatarColorOptions from "./components/editor/avatar-color-options";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  ChevronDownIcon,
+  DownloadIcon,
+  LoopIcon,
+  Share2Icon,
+} from "@radix-ui/react-icons";
 
 function App() {
   const [face, setFace] = useState(0);
@@ -40,19 +52,18 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="container max-w-screen-xl mt-10">
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-          <div className="sm:col-span-2 pb-5 sm:pr-5 bg-[#ED5781] rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-rows-2 sm:grid-cols-5 gap-3">
+          <div className="order-0 sm:col-span-2 bg-[#ED5781] rounded-lg align-middle justify-center flex">
             <AvatarPreview id="avatar-preview">
               <SentryAvatar config={{ face, hairColor }} />
             </AvatarPreview>
-            <Button onClick={() => onDownload()}>Download</Button>
           </div>
 
-          <div className="sm:col-span-3 bg-card rounded-lg pt-2">
+          <div className="order-1 sm:col-span-3 bg-white rounded-lg">
             <Tabs defaultValue="face">
-              <ScrollArea>
+              <ScrollArea className="bg-card rounded-t-md">
                 <div className="w-0">
-                  <TabsList className="bg-transparent p-0 px-3 m-0">
+                  <TabsList className="bg-transparent p-0 items-stretch">
                     <TabsTrigger value="face">Face</TabsTrigger>
                     <TabsTrigger value="hair">Hair</TabsTrigger>
                     <TabsTrigger value="eyes">Eyes</TabsTrigger>
@@ -88,6 +99,41 @@ function App() {
                 />
               </TabsContent>
             </Tabs>
+          </div>
+
+          <div className="order-0 sm:order-2 sm:col-span-2 grid grid-cols-5 gap-2">
+            <Button onClick={() => {}} className="col-span-2">
+              Randomize <LoopIcon className="ml-2 h-5 w-5" />
+            </Button>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className="bg-white text-card font-bold col-span-2">
+                  Download <ChevronDownIcon className="ml-1 h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Button variant="ghost" className="w-full justify-between">
+                    9:16 <DownloadIcon />
+                  </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Button variant="ghost" className="w-full justify-between">
+                    1:1 <DownloadIcon />
+                  </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Button variant="ghost" className="w-full justify-between">
+                    16:9 <DownloadIcon />
+                  </Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Button onClick={() => {}} className="bg-white text-card">
+              <Share2Icon className="h-5 w-5" />
+            </Button>
           </div>
         </div>
       </div>
