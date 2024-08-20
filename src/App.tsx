@@ -164,7 +164,7 @@ function App() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="bg-white text-card font-bold col-span-2">
+                <Button className="col-span-2" variant="sentry">
                   Download <ChevronDownIcon className="ml-1 h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
@@ -199,7 +199,7 @@ function App() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button onClick={() => {}} className="bg-white text-card">
+            <Button onClick={() => {}} variant="sentry">
               <Share2Icon className="h-5 w-5" />
             </Button>
           </div>
