@@ -40,56 +40,54 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="container max-w-screen-xl mt-10">
-        <div className="flex flex-wrap justify-center">
-          <div className="basis-2/3 sm:basis-1/3 pb-5 sm:pr-5">
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+          <div className="sm:col-span-2 pb-5 sm:pr-5 bg-[#ED5781] rounded-lg">
             <AvatarPreview id="avatar-preview">
               <SentryAvatar config={{ face, hairColor }} />
             </AvatarPreview>
             <Button onClick={() => onDownload()}>Download</Button>
           </div>
 
-          <div className="basis-full sm:basis-2/3">
-            <div className="bg-card rounded-lg pt-2 pb-3">
-              <Tabs defaultValue="face">
-                <ScrollArea>
-                  <div className="w-0">
-                    <TabsList className="bg-transparent p-0 px-3 m-0">
-                      <TabsTrigger value="face">Face</TabsTrigger>
-                      <TabsTrigger value="hair">Hair</TabsTrigger>
-                      <TabsTrigger value="eyes">Eyes</TabsTrigger>
-                      <TabsTrigger value="nose">Nose</TabsTrigger>
-                      <TabsTrigger value="mouth">Mouth</TabsTrigger>
-                      <TabsTrigger value="facial">Facial</TabsTrigger>
-                      <TabsTrigger value="accessories">Accessories</TabsTrigger>
-                    </TabsList>
-                  </div>
-                  <ScrollBar orientation="horizontal" />
-                </ScrollArea>
+          <div className="sm:col-span-3 bg-card rounded-lg pt-2">
+            <Tabs defaultValue="face">
+              <ScrollArea>
+                <div className="w-0">
+                  <TabsList className="bg-transparent p-0 px-3 m-0">
+                    <TabsTrigger value="face">Face</TabsTrigger>
+                    <TabsTrigger value="hair">Hair</TabsTrigger>
+                    <TabsTrigger value="eyes">Eyes</TabsTrigger>
+                    <TabsTrigger value="nose">Nose</TabsTrigger>
+                    <TabsTrigger value="mouth">Mouth</TabsTrigger>
+                    <TabsTrigger value="facial">Facial</TabsTrigger>
+                    <TabsTrigger value="accessories">Accessories</TabsTrigger>
+                  </TabsList>
+                </div>
+                <ScrollBar orientation="horizontal" />
+              </ScrollArea>
 
-                <TabsContent value="face">
-                  <AvatarGridOptions
-                    values={faces}
-                    currentValue={face}
-                    setValue={setFace}
-                    render={(face) => <Face i={face} />}
-                  />
-                </TabsContent>
+              <TabsContent value="face">
+                <AvatarGridOptions
+                  values={faces}
+                  currentValue={face}
+                  setValue={setFace}
+                  render={(face) => <Face i={face} />}
+                />
+              </TabsContent>
 
-                <TabsContent value="hair" className="space-y-3">
-                  <AvatarGridOptions
-                    values={hairColors}
-                    currentValue={hairColor}
-                    setValue={setHairColor}
-                    render={(hairColor) => <Hair color={hairColor} />}
-                  />
-                  <AvatarColorOptions
-                    colors={hairColorsNewList}
-                    currentColor={hairColorNew}
-                    setColor={setHairColorNew}
-                  />
-                </TabsContent>
-              </Tabs>
-            </div>
+              <TabsContent value="hair" className="space-y-3">
+                <AvatarGridOptions
+                  values={hairColors}
+                  currentValue={hairColor}
+                  setValue={setHairColor}
+                  render={(hairColor) => <Hair color={hairColor} />}
+                />
+                <AvatarColorOptions
+                  colors={hairColorsNewList}
+                  currentColor={hairColorNew}
+                  setColor={setHairColorNew}
+                />
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </div>
