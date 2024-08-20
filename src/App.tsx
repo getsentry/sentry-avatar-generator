@@ -158,7 +158,11 @@ function App() {
           </div>
 
           <div className="order-0 sm:order-2 sm:col-span-2 grid grid-cols-5 gap-2">
-            <Button onClick={() => {}} className="col-span-2">
+            <Button
+              onClick={() => {}}
+              className="col-span-2"
+              variant="colorful"
+            >
               Randomize <LoopIcon className="ml-2 h-5 w-5" />
             </Button>
 
@@ -200,7 +204,7 @@ function App() {
             </DropdownMenu>
 
             <Button onClick={() => {}} variant="sentry">
-              <Share2Icon className="h-5 w-5" />
+              <Share2Icon className="h-6 w-6" />
             </Button>
           </div>
         </div>
