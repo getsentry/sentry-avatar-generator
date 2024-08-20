@@ -15,7 +15,7 @@ function AvatarColorOptions({
   const isCustomColorSelected = !colors.includes(currentColor);
 
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 bg-white mx-3 p-3 rounded-lg">
+    <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 bg-white m-3 rounded-lg">
       {colors.map(function (color, i) {
         const isSelected = color === currentColor;
 
@@ -23,7 +23,8 @@ function AvatarColorOptions({
           <button onClick={() => setColor(color)} key={i}>
             <div
               className={classNames("w-full aspect-square", {
-                "border-purple-700 border-4": isSelected,
+                "border-purple-700 border-4 ring-4 ring-white ring-inset":
+                  isSelected,
               })}
               style={{ backgroundColor: color }}
             ></div>
@@ -36,7 +37,10 @@ function AvatarColorOptions({
             className={classNames(
               classes.colorPicker,
               "w-full aspect-square rounded",
-              { "border-purple-700 border-4": isCustomColorSelected }
+              {
+                "border-purple-700 border-4 ring-4 ring-white ring-inset":
+                  isCustomColorSelected,
+              }
             )}
           ></div>
         </PopoverTrigger>

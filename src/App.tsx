@@ -28,6 +28,10 @@ import {
 
 type AspectRatioOption = "9:16" | "1:1" | "16:9";
 
+function TabSectionLabel({ children }: { children: React.ReactNode }) {
+  return <h2 className="text-primary font-bold mx-3 text-lg">{children}</h2>;
+}
+
 function App() {
   const [currentTab, setCurrentTab] = useState("face");
 
@@ -84,7 +88,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className="container max-w-screen-xl mt-10">
+      <div className="container max-w-screen-xl my-10">
         <div className="grid grid-cols-1 sm:grid-rows-2 sm:grid-cols-5 gap-3">
           <div className="order-0 sm:col-span-2 bg-[#ED5781] rounded-lg align-middle justify-center flex">
             <AvatarPreview id="avatar-preview">
@@ -103,7 +107,9 @@ function App() {
                 <div className="w-0">
                   <TabsList className="bg-transparent p-0 items-stretch">
                     {tabs.map((tab) => (
-                      <TabsTrigger value={tab.value}>{tab.name}</TabsTrigger>
+                      <TabsTrigger value={tab.value} className="text-base">
+                        {tab.name}
+                      </TabsTrigger>
                     ))}
                   </TabsList>
                 </div>
@@ -111,6 +117,7 @@ function App() {
               </ScrollArea>
 
               <TabsContent value="face" className="grow">
+                <TabSectionLabel>Style</TabSectionLabel>
                 <AvatarGridOptions
                   values={faces}
                   currentValue={face}
@@ -120,12 +127,15 @@ function App() {
               </TabsContent>
 
               <TabsContent value="hair" className="grow">
+                <TabSectionLabel>Style</TabSectionLabel>
                 <AvatarGridOptions
                   values={hairColors}
                   currentValue={hairColor}
                   setValue={setHairColor}
                   render={(hairColor) => <Hair color={hairColor} />}
                 />
+
+                <TabSectionLabel>Color</TabSectionLabel>
                 <AvatarColorOptions
                   colors={hairColorsNewList}
                   currentColor={hairColorNew}
@@ -157,19 +167,24 @@ function App() {
             </Tabs>
           </div>
 
-          <div className="order-0 sm:order-2 sm:col-span-2 grid grid-cols-5 gap-2">
+          <div className="order-0 sm:order-2 sm:col-span-2 grid grid-cols-5 gap-2 @container">
             <Button
               onClick={() => {}}
-              className="col-span-2"
+              className="col-span-2 text-xs @xs:text-sm @sm:text-lg"
               variant="colorful"
             >
-              Randomize <LoopIcon className="ml-2 h-5 w-5" />
+              Randomize
+              <LoopIcon className="ml-2 h-5 w-5 min-w-5 hidden @xs:inline-block" />
             </Button>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="col-span-2" variant="sentry">
-                  Download <ChevronDownIcon className="ml-1 h-5 w-5" />
+                <Button
+                  className="col-span-2 text-xs @xs:text-sm @sm:text-lg"
+                  variant="sentry"
+                >
+                  Download{" "}
+                  <ChevronDownIcon className="ml-1 h-5 w-5 min-w-5 hidden @xs:inline-block" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -204,7 +219,7 @@ function App() {
             </DropdownMenu>
 
             <Button onClick={() => {}} variant="sentry">
-              <Share2Icon className="h-6 w-6" />
+              <Share2Icon className="h-6 w-6 min-w-5" />
             </Button>
           </div>
         </div>
