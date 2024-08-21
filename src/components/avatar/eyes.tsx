@@ -4,12 +4,12 @@ export interface EyesConfig {
 }
 
 export interface EyesProps {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   config: EyesConfig;
 }
 
-function Mouth({ width, height }: EyesProps) {
+function Mouth({ width, height, config: { color } }: EyesProps) {
   return (
     <svg
       width={width}
@@ -36,7 +36,7 @@ function Mouth({ width, height }: EyesProps) {
         />
         <path
           d="M1533.16 1291.58L1595.06 1289.82L1612.42 1295.61L1630.42 1334.82L1620.77 1389.47C1620.77 1389.47 1518.55 1391.4 1518.55 1389.47C1518.55 1387.54 1509.55 1341.89 1509.55 1341.89L1533.16 1291.58Z"
-          fill="#444444"
+          fill={color}
         />
         <path
           d="M1542.98 1318.75L1541.7 1339.32H1593.13L1593.77 1316.18L1542.98 1318.75Z"
@@ -56,7 +56,7 @@ function Mouth({ width, height }: EyesProps) {
         />
         <path
           d="M1000.12 1291.58L938.22 1289.82L920.862 1295.61L902.862 1334.82L912.504 1389.47C912.504 1389.47 1014.73 1391.4 1014.73 1389.47C1014.73 1387.54 1023.73 1341.89 1023.73 1341.89L1000.12 1291.58Z"
-          fill="#444444"
+          fill={color}
         />
         <path
           d="M990.295 1318.75L991.581 1339.32H940.15L939.506 1316.18L990.295 1318.75Z"

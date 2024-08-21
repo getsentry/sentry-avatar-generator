@@ -30,16 +30,22 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@radix-ui/react-icons";
+import Eyes from "./components/avatar/eyes";
 
 type AspectRatioOption = "9:16" | "1:1" | "16:9";
+
+const colorSwatches = {
+  face: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+  eyes: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+};
 
 function App() {
   const [currentTab, setCurrentTab] = useState("face");
 
   const tabs: { name: string; value: string }[] = [
     { name: "Face", value: "face" },
-    { name: "Hair", value: "hair" },
     { name: "Eyes", value: "eyes" },
+    { name: "Hair", value: "hair" },
     { name: "Nose", value: "nose" },
     { name: "Mouth", value: "mouth" },
     { name: "Facial", value: "facial" },
@@ -63,24 +69,7 @@ function App() {
   };
 
   const [faceColor, setFaceColor] = useState<string>("#FDFAF3");
-  const faceColors: string[] = [
-    "#FDFAF3",
-    "#F2E39F",
-    "#D87436",
-    "#9F4112",
-    "#4F2210",
-    "#0E0705",
-  ];
-
-  // const [eyeColor, setEyeColor] = useState<string>("#FDFAF3");
-  // const eyeColors: string[] = [
-  //   "#FDFAF3",
-  //   "#F2E39F",
-  //   "#D87436",
-  //   "#9F4112",
-  //   "#4F2210",
-  //   "#0E0705",
-  // ];
+  const [eyeColor, setEyeColor] = useState<string>("#FDFAF3");
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onDownload = (_aspectRatio: AspectRatioOption) => {
@@ -100,7 +89,7 @@ function App() {
               <SentryAvatar
                 config={{
                   face: { color: faceColor, style: "main" },
-                  eyes: { color: "#FFF", style: "main" },
+                  eyes: { color: eyeColor, style: "main" },
                 }}
               />
             </AvatarPreview>
@@ -139,14 +128,29 @@ function App() {
                 />
                 <TabSectionLabel>Color</TabSectionLabel>
                 <AvatarColorOptions
-                  colors={faceColors}
+                  colors={colorSwatches.face}
                   currentColor={faceColor}
                   setColor={setFaceColor}
                 />
               </TabsContent>
 
-              <TabsContent value="hair" className="grow">
-                hair goes here
+              <TabsContent value="eyes" className="grow">
+                <TabSectionLabel>Style</TabSectionLabel>
+                <AvatarGridOptions
+                  values={["main"]}
+                  currentValue={"main"}
+                  setValue={() => {}}
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  render={(_face) => (
+                    <Eyes config={{ style: "main", color: "#8E8E8E" }} />
+                  )}
+                />
+                <TabSectionLabel>Color</TabSectionLabel>
+                <AvatarColorOptions
+                  colors={colorSwatches.eyes}
+                  currentColor={eyeColor}
+                  setColor={setEyeColor}
+                />
               </TabsContent>
 
               <div>
