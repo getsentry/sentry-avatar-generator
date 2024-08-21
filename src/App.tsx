@@ -84,11 +84,11 @@ type AvatarGeneratorConfigOptions = {
     /**
      * Preset of colors available for the part.
      */
-    colors: string[];
+    colors?: string[];
     /**
      * Default color set when the editor is first loaded.
      */
-    defaultColor: string;
+    defaultColor?: string;
     /**
      * Neutral color used to display all styles available for the part.
      */
@@ -144,8 +144,6 @@ const configOptions: AvatarGeneratorConfigOptions = {
     render: Brows,
   },
   [AvatarPart.MOUTH]: {
-    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-    defaultColor: "#F2E39F",
     neutralColor: "#444444",
     styles: Object.values(MouthStyle),
     defaultStyle: Object.values(MouthStyle)[0],
@@ -304,12 +302,16 @@ function App() {
                         );
                       }}
                     />
-                    <TabSectionLabel>Color</TabSectionLabel>
-                    <AvatarColorOptions
-                      colors={partConfig.colors}
-                      currentColor={currentPartConfig.color}
-                      setColor={(color) => setPartColor(part, color)}
-                    />
+                    {partConfig.colors && (
+                      <>
+                        <TabSectionLabel>Color</TabSectionLabel>
+                        <AvatarColorOptions
+                          colors={partConfig.colors}
+                          currentColor={currentPartConfig.color}
+                          setColor={(color) => setPartColor(part, color)}
+                        />
+                      </>
+                    )}
                   </TabsContent>
                 );
               })}
