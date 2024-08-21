@@ -10,7 +10,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "./components/ui/scroll-area";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AvatarGridOptions from "./components/editor/avatar-grid-options";
 import domtoimage from "dom-to-image";
 import { Button } from "./components/ui/button";
@@ -183,6 +183,28 @@ const generateDefaultConfig = (): AvatarConfig => {
   return defaultConfig;
 };
 
+const updateQueryString = (config: AvatarConfig) => {
+  const jsonString = JSON.stringify(config);
+  const encodedConfig = btoa(jsonString);
+
+  const url = new URL(window.location.href);
+  url.searchParams.set("c", encodedConfig);
+  history.pushState(null, "", url);
+};
+
+const decodeQueryString = () => {
+  const params = new URLSearchParams(window.location.search);
+  const config = params.get("c");
+
+  if (config) {
+    const decodedConfig = JSON.parse(atob(config));
+
+    return decodedConfig;
+  }
+
+  return null;
+};
+
 function App() {
   const [currentTab, setCurrentTab] = useState("face");
 
@@ -204,11 +226,21 @@ function App() {
 
   const [config, setConfig] = useState<AvatarConfig>(generateDefaultConfig());
 
+  // parse from query string and set it as the current config
+  useEffect(() => {
+    const initialConfig = decodeQueryString();
+
+    if (initialConfig) {
+      setConfig(initialConfig);
+    }
+  }, []);
+
   const setPartColor = (part: AvatarPart, color: string) => {
     const newConfig = { ...config };
     newConfig[part]!.color = color;
 
     setConfig(newConfig);
+    updateQueryString(newConfig);
   };
 
   const setPartStyle = <T extends AvatarPart>(
@@ -219,6 +251,7 @@ function App() {
     newConfig[part]!.style = style;
 
     setConfig(newConfig);
+    updateQueryString(newConfig);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
