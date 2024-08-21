@@ -9,7 +9,7 @@ function FaceHighlight({
   className,
 }: SubPartProps<FaceStyle>) {
   switch (style) {
-    case FaceStyle.MAIN:
+    case FaceStyle.FIRST:
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"

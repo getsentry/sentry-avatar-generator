@@ -30,7 +30,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@radix-ui/react-icons";
-import Eyes from "./components/avatar/eyes";
+import Eyes from "./components/avatar/eyes/eyes";
 import {
   EyesStyle,
   FaceStyle,

@@ -6,9 +6,10 @@ function FaceBase({
     height,
     config: { color, style },
   },
+  className,
 }: SubPartProps<FaceStyle>) {
   switch (style) {
-    case FaceStyle.MAIN:
+    case FaceStyle.FIRST:
       return (
         <svg
           id="Face"
@@ -16,6 +17,7 @@ function FaceBase({
           width={width}
           height={height}
           viewBox="0 0 1920 1920"
+          className={className}
         >
           <g id="Face_1">
             <path

@@ -1,4 +1,4 @@
-import Eyes, { EyesConfig } from "./eyes";
+import Eyes, { EyesConfig } from "./eyes/eyes";
 import Face, { FaceConfig } from "./face/face";
 import Mouth from "./mouth";
 

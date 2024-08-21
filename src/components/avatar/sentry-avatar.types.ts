@@ -1,5 +1,5 @@
 export enum FaceStyle {
-  MAIN = "main",
+  FIRST = "first",
   SECOND = "second",
   THIRD = "third",
   FOURTH = "fourth",
@@ -8,7 +8,12 @@ export enum FaceStyle {
 }
 
 export enum EyesStyle {
-  MAIN = "main",
+  FIRST = "first",
+  SECOND = "second",
+  THIRD = "third",
+  FOURTH = "fourth",
+  FIFTH = "fifth",
+  SIXTH = "sixth",
 }
 
 export type PartConfig<PartStyle> = {

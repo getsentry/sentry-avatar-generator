@@ -1,0 +1,13 @@
+.eyes-fill {
+  fill: #828282;
+  mix-blend-mode: multiply;
+  opacity: 1;
+}
+
+.eyes-isolation {
+  isolation: isolate;
+}
+
+.eyes-white {
+  fill: #fff;
+}

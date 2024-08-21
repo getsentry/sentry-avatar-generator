@@ -12,7 +12,7 @@ function FaceShadow({
   className,
 }: SubPartProps<FaceStyle>) {
   switch (style) {
-    case FaceStyle.MAIN:
+    case FaceStyle.FIRST:
       return (
         <svg
           id="Face"
