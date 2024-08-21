@@ -72,7 +72,9 @@ function App() {
     "#0E0705",
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [eyeColor, setEyeColor] = useState<string>("#FDFAF3");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const eyeColors: string[] = [
     "#FDFAF3",
     "#F2E39F",
