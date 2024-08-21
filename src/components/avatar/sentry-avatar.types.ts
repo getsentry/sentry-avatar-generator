@@ -1,6 +1,10 @@
 export enum FaceStyle {
   MAIN = "main",
   SECOND = "second",
+  THIRD = "third",
+  FOURTH = "fourth",
+  FIFTH = "fifth",
+  SIXTH = "sixth",
 }
 
 export enum EyesStyle {
