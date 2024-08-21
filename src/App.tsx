@@ -40,6 +40,7 @@ import {
 } from "./components/avatar/sentry-avatar.types";
 import Brows from "./components/avatar/brows/brows";
 import Mouth from "./components/avatar/mouth/mouth";
+import { toast, Toaster } from "sonner";
 
 /**
  * Available download aspect ratio options.
@@ -263,6 +264,11 @@ function App() {
       });
   };
 
+  const onShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success("Avatar URL copied!");
+  };
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="container max-w-screen-xl my-10">
@@ -424,12 +430,13 @@ function App() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button onClick={() => {}} variant="sentry">
+            <Button onClick={onShare} variant="sentry">
               <Share2Icon className="h-6 w-6 min-w-5" />
             </Button>
           </div>
         </div>
       </div>
+      <Toaster />
     </ThemeProvider>
   );
 }
