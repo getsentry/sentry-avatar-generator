@@ -32,10 +32,12 @@ import {
 } from "@radix-ui/react-icons";
 import Eyes from "./components/avatar/eyes/eyes";
 import {
+  BrowsStyle,
   EyesStyle,
   FaceStyle,
   PartProps,
 } from "./components/avatar/sentry-avatar.types";
+import Brows from "./components/avatar/brows/brows";
 
 /**
  * Available download aspect ratio options.
@@ -48,6 +50,7 @@ type AspectRatioOption = "9:16" | "1:1" | "16:9";
 enum AvatarPart {
   FACE = "face",
   EYES = "eyes",
+  BROWS = "brows",
 }
 
 /**
@@ -56,6 +59,7 @@ enum AvatarPart {
 type AvatarPartStyles = {
   [AvatarPart.FACE]: FaceStyle;
   [AvatarPart.EYES]: EyesStyle;
+  [AvatarPart.BROWS]: BrowsStyle;
 };
 
 /**
@@ -111,7 +115,7 @@ type AvatarConfig = {
 };
 
 const configOptions: AvatarGeneratorConfigOptions = {
-  face: {
+  [AvatarPart.FACE]: {
     colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
     defaultColor: "#F2E39F",
     neutralColor: "#8E8E8E",
@@ -119,7 +123,7 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(FaceStyle)[0],
     render: Face,
   },
-  eyes: {
+  [AvatarPart.EYES]: {
     colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
     defaultColor: "#F2E39F",
     neutralColor: "#444444",
@@ -127,11 +131,20 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(EyesStyle)[0],
     render: Eyes,
   },
+  [AvatarPart.BROWS]: {
+    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+    defaultColor: "#F2E39F",
+    neutralColor: "#444444",
+    styles: Object.values(BrowsStyle),
+    defaultStyle: Object.values(BrowsStyle)[0],
+    render: Brows,
+  },
 };
 
 const tabs: { name: string; value: string }[] = [
   { name: "Face", value: "face" },
   { name: "Eyes", value: "eyes" },
+  { name: "Brows", value: "brows" },
   // { name: "Hair", value: "hair" },
   // { name: "Nose", value: "nose" },
   // { name: "Mouth", value: "mouth" },
@@ -222,6 +235,10 @@ function App() {
                   eyes: {
                     color: config[AvatarPart.EYES]!.color,
                     style: config[AvatarPart.EYES]!.style,
+                  },
+                  brows: {
+                    color: config[AvatarPart.BROWS]!.color,
+                    style: config[AvatarPart.BROWS]!.style,
                   },
                 }}
               />

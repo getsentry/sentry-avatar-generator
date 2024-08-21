@@ -12,7 +12,7 @@ function AvatarGridOptions<T>({
   render: (value: T) => React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 bg-white m-3 rounded-lg">
+    <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 bg-white m-3 rounded-lg">
       {values.map(function (value, i) {
         const isSelected = value == currentValue;
 

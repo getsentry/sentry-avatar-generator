@@ -7,11 +7,7 @@ function AvatarPreview({
   id: string;
   children: React.ReactNode;
 }) {
-  return (
-    <div id={id} className="h-full w-full">
-      {children}
-    </div>
-  );
+  return <div id={id}>{children}</div>;
 }
 
 export default AvatarPreview;
