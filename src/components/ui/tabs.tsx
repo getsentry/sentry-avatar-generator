@@ -50,4 +50,8 @@ const TabsContent = React.forwardRef<
 ));
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+function TabSectionLabel({ children }: { children: React.ReactNode }) {
+  return <h2 className="text-primary font-bold mx-3 text-lg">{children}</h2>;
+}
+
+export { Tabs, TabsList, TabsTrigger, TabsContent, TabSectionLabel };

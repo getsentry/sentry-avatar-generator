@@ -2,10 +2,15 @@ import Face from "./components/avatar/face";
 import SentryAvatar from "./components/avatar/sentry-avatar";
 import AvatarPreview from "./components/editor/avatar-preview";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabSectionLabel,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "./components/ui/scroll-area";
 import { useState } from "react";
-import Hair, { HairColor } from "./components/avatar/hair";
 import AvatarGridOptions from "./components/editor/avatar-grid-options";
 import domtoimage from "dom-to-image";
 import { Button } from "./components/ui/button";
@@ -27,10 +32,6 @@ import {
 } from "@radix-ui/react-icons";
 
 type AspectRatioOption = "9:16" | "1:1" | "16:9";
-
-function TabSectionLabel({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-primary font-bold mx-3 text-lg">{children}</h2>;
-}
 
 function App() {
   const [currentTab, setCurrentTab] = useState("face");
@@ -61,14 +62,18 @@ function App() {
     setCurrentTab(tabs[nextIndex].value);
   };
 
-  const [face, setFace] = useState(0);
-  const faces = [0, 1, 2, 3];
+  const [faceColor, setFaceColor] = useState<string>("#FDFAF3");
+  const faceColors: string[] = [
+    "#FDFAF3",
+    "#F2E39F",
+    "#D87436",
+    "#9F4112",
+    "#4F2210",
+    "#0E0705",
+  ];
 
-  const [hairColor, setHairColor] = useState<HairColor>("black");
-  const hairColors: HairColor[] = ["black", "blonde", "brown", "red"];
-
-  const [hairColorNew, setHairColorNew] = useState<string>("black");
-  const hairColorsNewList: string[] = [
+  const [eyeColor, setEyeColor] = useState<string>("#FDFAF3");
+  const eyeColors: string[] = [
     "#FDFAF3",
     "#F2E39F",
     "#D87436",
@@ -92,7 +97,12 @@ function App() {
         <div className="grid grid-cols-1 sm:grid-rows-2 sm:grid-cols-5 gap-3">
           <div className="order-0 sm:col-span-2 bg-[#ED5781] rounded-lg align-middle justify-center flex">
             <AvatarPreview id="avatar-preview">
-              <SentryAvatar config={{ face, hairColor }} />
+              <SentryAvatar
+                config={{
+                  face: { color: faceColor, style: "main" },
+                  eyes: { color: eyeColor, style: "main" },
+                }}
+              />
             </AvatarPreview>
           </div>
 
@@ -119,28 +129,24 @@ function App() {
               <TabsContent value="face" className="grow">
                 <TabSectionLabel>Style</TabSectionLabel>
                 <AvatarGridOptions
-                  values={faces}
-                  currentValue={face}
-                  setValue={setFace}
-                  render={(face) => <Face i={face} />}
+                  values={["main"]}
+                  currentValue={"main"}
+                  setValue={() => {}}
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  render={(_face) => (
+                    <Face config={{ style: "main", color: "#8E8E8E" }} />
+                  )}
+                />
+                <TabSectionLabel>Color</TabSectionLabel>
+                <AvatarColorOptions
+                  colors={faceColors}
+                  currentColor={faceColor}
+                  setColor={setFaceColor}
                 />
               </TabsContent>
 
               <TabsContent value="hair" className="grow">
-                <TabSectionLabel>Style</TabSectionLabel>
-                <AvatarGridOptions
-                  values={hairColors}
-                  currentValue={hairColor}
-                  setValue={setHairColor}
-                  render={(hairColor) => <Hair color={hairColor} />}
-                />
-
-                <TabSectionLabel>Color</TabSectionLabel>
-                <AvatarColorOptions
-                  colors={hairColorsNewList}
-                  currentColor={hairColorNew}
-                  setColor={setHairColorNew}
-                />
+                hair goes here
               </TabsContent>
 
               <div>

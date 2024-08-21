@@ -1,20 +1,24 @@
-import Face from "./face";
-import Hair, { HairColor } from "./hair";
+import Eyes, { EyesConfig } from "./eyes";
+import Face, { FaceConfig } from "./face";
+import Mouth from "./mouth";
 import classes from "./sentry-avatar.module.css";
 
 export interface SentryAvatarConfig {
-  face: number;
-  hairColor: HairColor;
+  face: FaceConfig;
+  eyes: EyesConfig;
 }
 
 function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
   return (
     <div className={classes.avatar}>
-      <div className={classes.body}>
-        <Face i={config.face} />
+      <div className={classes.face}>
+        <Face width={512} height={512} config={config.face} />
       </div>
-      <div className={classes.hair}>
-        <Hair color={config.hairColor} />
+      <div className={classes.eyes}>
+        <Eyes width={512} height={512} config={config.eyes} />
+      </div>
+      <div className={classes.mouth}>
+        <Mouth width={512} height={512} />
       </div>
     </div>
   );
