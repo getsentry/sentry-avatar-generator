@@ -5,7 +5,7 @@ import FaceShadow from "./face-shadow";
 
 export interface FaceConfig extends PartConfig<FaceStyle> {
   style: FaceStyle;
-  color: string;
+  color?: string;
 }
 
 export interface FaceProps extends PartProps<FaceStyle> {

@@ -36,13 +36,15 @@ export enum MouthStyle {
 
 export type PartConfig<PartStyle> = {
   style: PartStyle;
-  color: string;
+  color?: string;
 };
 
 export type PartProps<PartStyle> = {
   width?: number;
   height?: number;
   config: PartConfig<PartStyle>;
+  faceColor?: string;
+  hairColor?: string;
 };
 
 export type SubPartProps<PartStyle> = {

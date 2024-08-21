@@ -14,15 +14,18 @@ function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
   return (
     <div className="relative w-[512px] h-[512px]">
       <Face width={512} height={512} config={config.face} />
-      <Eyes width={512} height={512} config={config.eyes} />
+      <Eyes
+        width={512}
+        height={512}
+        config={config.eyes}
+        faceColor={config.face.color}
+      />
       <Brows width={512} height={512} config={config.brows} />
       <Mouth
         width={512}
         height={512}
-        config={{
-          ...config.mouth,
-          color: config.face.color, // mouth uses the same color as the face
-        }}
+        config={config.mouth}
+        faceColor={config.face.color}
       />
     </div>
   );

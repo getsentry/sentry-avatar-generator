@@ -1,18 +1,29 @@
-import { EyesStyle, PartConfig } from "../sentry-avatar.types";
+import { darkenHexColor } from "@/lib/utils";
+import { EyesStyle, PartConfig, PartProps } from "../sentry-avatar.types";
 import classes from "./eyes.module.css";
+
+const EYES_DARKENED_PERCENTAGE = 30;
 
 export interface EyesConfig extends PartConfig<EyesStyle> {
   style: EyesStyle;
-  color: string;
+  color?: string;
 }
 
-export interface EyesProps {
+export interface EyesProps extends PartProps<EyesStyle> {
   width?: number;
   height?: number;
   config: EyesConfig;
+  faceColor?: string;
 }
 
-function Eyes({ width, height, config: { color, style } }: EyesProps) {
+function Eyes({
+  width,
+  height,
+  faceColor,
+  config: { color, style },
+}: EyesProps) {
+  faceColor = faceColor ?? "#000";
+
   switch (style) {
     case EyesStyle.FIRST:
       return (
@@ -40,10 +51,12 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1091.6037,974.1001c.8631-1.1508,43.1534-42.8657,43.1534-42.8657l91.1974-.2877,60.9901,27.0428-12.6583,6.6168-51.2087-23.5905-88.0329-2.0138-40.2765,35.6734-3.1646-.5754Z"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1104.8374,1047.7485c1.1508-.8631,11.7953-4.603,11.7953-4.603,0,0,66.1685,25.0289,66.1685,24.1659s42.0026-15.5352,42.0026-15.5352l10.9322-2.0138-52.6471,26.4674-78.2514-28.4812Z"
                 />
                 <path d="M1087.7576,1018.5938c.3445-1.7225,59.2543-58.5653,59.2543-58.5653l85.4364,9.3015,49.9527,26.8711,5.8565,12.0576-57.8763-33.0721-83.0249-8.957-51.295,48.5048,11.3307,4.8216-19.6346-.9621Z" />
@@ -61,10 +74,12 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M827.811,974.1001c-.8631-1.1508-43.1534-42.8657-43.1534-42.8657l-91.1974-.2877-60.9901,27.0428,12.6583,6.6168,51.2087-23.5905,88.0329-2.0138,40.2765,35.6734,3.1646-.5754Z"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M814.5773,1047.7485c-1.1508-.8631-11.7953-4.603-11.7953-4.603,0,0-66.1685,25.0289-66.1685,24.1659,0-.8631-42.0026-15.5352-42.0026-15.5352l-10.9322-2.0138,52.6471,26.4674,78.2514-28.4812Z"
                 />
                 <path d="M831.6571,1018.5938c-.3445-1.7225-59.2543-58.5653-59.2543-58.5653l-85.4364,9.3015-49.9527,26.8711-5.8565,12.0576,57.8763-33.0721,83.0249-8.957,51.295,48.5048-11.3307,4.8216,19.6346-.9621Z" />
@@ -101,6 +116,7 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 <path d="M1088.5855,1007.5729c.9914-.9914,24.7851-20.8195,24.7851-20.8195l33.0468-20.1585,35.0296-8.2617,35.3601,3.9656,92.3086,29.506-2.6437,2.6437-22.8023,2.6437-27.8674-12.9826-40.6476-16.1929-34.3687-4.6266-35.0674,9.147-29.0434,16.6295-17.5148,16.5234,12.8883,5.9484-4.6266,1.3219-15.8625-2.3133-2.9742-2.9742Z" />
                 <polygon
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   points="1116.2034 1034.1591 1123.1079 1046.8174 1174.2439 1064.4792 1206.4651 1062.1777 1245.0154 1048.3686 1231.7817 1046.6424 1203.5882 1056.4239 1172.5178 1056.9993 1116.2034 1034.1591"
                 />
                 <path
@@ -118,6 +134,7 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 <path d="M821.5216,1007.5729c-.9914-.9914-24.7851-20.8195-24.7851-20.8195l-33.0468-20.1585-35.0296-8.2617-35.3601,3.9656-92.3086,29.506,2.6437,2.6437,22.8023,2.6437,27.8674-12.9826,40.6476-16.1929,34.3687-4.6266,35.0674,9.147,29.0434,16.6295,17.5148,16.5234-12.8883,5.9484,4.6266,1.3219,15.8625-2.3133,2.9742-2.9742Z" />
                 <polygon
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   points="793.9037 1034.1591 786.9991 1046.8174 735.8632 1064.4792 703.642 1062.1777 665.0916 1048.3686 678.3253 1046.6424 706.5189 1056.4239 737.5893 1056.9993 793.9037 1034.1591"
                 />
               </g>
@@ -144,10 +161,12 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1091.9127,991.4746c1.6616-1.6616,40.9924-38.5182,40.9924-38.5182l85.932-5.6276,59.6876,25.3603,3.4391,12.5057-65.3421-28.4504-83.1627,5.6276-31.5768,26.8872-9.9694,2.2154Z"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1102.5626,1076.7547c1.3036.4345,70.8311,26.9419,70.8311,26.9419l35.6328-3.4764,50.4074-27.3764-13.9055-.8691-40.8474,19.9891-35.6328,3.0418-58.6638-18.251h-7.8218Z"
                 />
                 <polygon
@@ -165,10 +184,12 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M811.0769,991.4746c-1.6616-1.6616-40.9924-38.5182-40.9924-38.5182l-85.932-5.6276-59.6876,25.3603-3.4391,12.5057,65.3421-28.4504,83.1627,5.6276,31.5768,26.8872,9.9694,2.2154Z"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M800.427,1076.7547c-1.3036.4345-70.8311,26.9419-70.8311,26.9419l-35.6328-3.4764-50.4074-27.3764,13.9055-.8691,40.8474,19.9891,35.6328,3.0418,58.6638-18.251h7.8218Z"
                 />
                 <polygon
@@ -213,14 +234,17 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 <path d="M1110.2419,1038.8841s-20.2053-5.2113-20.2053-6.0307,54.0782-42.8802,72.1043-53.532c22.396-.8194,82.2099-.8194,82.2099-.8194l57.6288,38.7834-10.3787,7.3743s2.185-5.7356,1.9119-6.5549-51.0739-33.3209-51.0739-33.3209h-79.4786s-57.6288,37.4178-65.8225,47.5233c3.8223,2.599,13.1041,6.5769,13.1041,6.5769Z" />
                 <polygon
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   points="1087.6244 1003.2203 1092.7386 1004.5841 1159.5643 945.9412 1148.9949 945.9412 1087.6244 1003.2203"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1069.8952,1046.1797c1.0228-.3409,4.4323.3409,4.4323.3409l44.6641,52.1649-13.2969-5.7961-35.7994-46.7098Z"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1141.1508,1073.0048c1.0228.3409,30.9429,21.9303,30.9429,21.9303l55.062,1.3652,36.355-17.5304h-6.471l-30.7076,8.9417-51.4147-.9412-25.9225-13.6558-7.8441-.1097Z"
                 />
                 <path
@@ -238,14 +262,17 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 <path d="M814.4848,1038.8841s20.2053-5.2113,20.2053-6.0307c0-.8194-54.0782-42.8802-72.1043-53.532-22.396-.8194-82.2099-.8194-82.2099-.8194l-57.6288,38.7834,10.3787,7.3743s-2.185-5.7356-1.9119-6.5549,51.0739-33.3209,51.0739-33.3209h79.4786s57.6288,37.4178,65.8225,47.5233c-3.8223,2.599-13.1041,6.5769-13.1041,6.5769Z" />
                 <polygon
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   points="837.1022 1003.2203 831.988 1004.5841 765.1624 945.9412 775.7317 945.9412 837.1022 1003.2203"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M854.8314,1046.1797c-1.0228-.3409-4.4323.3409-4.4323.3409l-44.6641,52.1649,13.2969-5.7961,35.7994-46.7098Z"
                 />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M783.5758,1073.0048c-1.0228.3409-30.9429,21.9303-30.9429,21.9303l-55.062,1.3652-36.355-17.5304h6.471s30.7076,8.9417,30.7076,8.9417l51.4147-.9412,25.9225-13.6558,7.8441-.1097Z"
                 />
               </g>
@@ -281,6 +308,7 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                   />
                   <polygon
                     className={classes.eyesFill}
+                    fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                     points="1097.2672 1050.3226 1091.0874 1057.5323 1156.6613 1087.401 1149.7949 1076.7581 1097.2672 1050.3226"
                   />
                   <path d="M1269.2698,997.7948l-71.0669-32.6152-56.991,1.7166s-39.4817,29.8687-42.2281,32.9586c-2.1747,2.4464-8.1818,12.5551-10.5908,16.6615l-17.9631,12.807,3.2098,4.8149s23.1114-2.5975,23.8247-2.4191l-17.8895-.6145-2.3898-2.3215,13.3148-10.5835-.0192-.0615,9.0409-14.9525,42.6052-32.9508,55.8274-1.8889,68.5691,31.5089,32.9586,30.212,4.8802-.017-35.0923-32.255Z" />
@@ -300,6 +328,7 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                   />
                   <polygon
                     className={classes.eyesFill}
+                    fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                     points="802.6922 1050.3226 808.8719 1057.5323 743.2981 1087.401 750.1645 1076.7581 802.6922 1050.3226"
                   />
                   <path d="M630.6896,997.7948l71.0669-32.6152,56.991,1.7166s39.4817,29.8687,42.2281,32.9586c2.1747,2.4464,8.1818,12.5551,10.5908,16.6615l17.9631,12.807-3.2098,4.8149s-23.1114-2.5975-23.8247-2.4191l17.8895-.6145,2.3898-2.3215-13.3148-10.5835.0192-.0615-9.0409-14.9525-42.6052-32.9508-55.8274-1.8889-68.5691,31.5089-32.9586,30.212-4.8802-.017,35.0923-32.255Z" />
@@ -337,6 +366,7 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 <path d="M1082.316,1041.2656c1.6654-.4163,15.4045-6.6614,15.4045-6.6614l20.4006-30.8091,71.2358-25.3484,29.063,11.1445,52.4974,38.3516,15.4045-.4163s10.8248-26.6457,9.5758-26.6457-14.1073,7.7215-14.1073,7.7215l-26.8778-17.4815-34.963-17.263-29.063-6.7741-72.7655,26.7193-35.8051,47.4626Z" />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M1097.0126,1052.7568l-5.9287,5.1382,50.1659,29.1818,38.0076-.4968-2.4353-3.8509s-25.692-2.4158-26.8777-3.6016-52.9317-26.3707-52.9317-26.3707Z"
                 />
                 <path
@@ -354,6 +384,7 @@ function Eyes({ width, height, config: { color, style } }: EyesProps) {
                 <path d="M831.3376,1041.2656c-1.6654-.4163-15.4045-6.6614-15.4045-6.6614l-20.4006-30.8091-71.2358-25.3484-29.063,11.1445-52.4974,38.3516-15.4045-.4163s-10.8248-26.6457-9.5758-26.6457,14.1073,7.7215,14.1073,7.7215l26.8778-17.4815,34.963-17.263,29.063-6.7741,72.7655,26.7193,35.8051,47.4626Z" />
                 <path
                   className={classes.eyesFill}
+                  fill={darkenHexColor(faceColor, EYES_DARKENED_PERCENTAGE)}
                   d="M816.641,1052.7568l5.9287,5.1382-50.1659,29.1818-38.0076-.4968,2.4353-3.8509s25.692-2.4158,26.8777-3.6016,52.9317-26.3707,52.9317-26.3707Z"
                 />
               </g>

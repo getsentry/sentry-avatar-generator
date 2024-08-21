@@ -129,7 +129,7 @@ const configOptions: AvatarGeneratorConfigOptions = {
     render: Face,
   },
   [AvatarPart.EYES]: {
-    colors: ["#475676", "#7f8e91", "#54513e", "#5a381c", "#19110f"],
+    colors: ["#475676", "#7f8e91", "#515055", "#54513e", "#5a381c", "#19110f"],
     defaultColor: "#54513e",
     neutralColor: "#444444",
     styles: Object.values(EyesStyle),

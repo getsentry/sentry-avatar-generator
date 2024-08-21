@@ -2,7 +2,7 @@ import { BrowsStyle, PartConfig } from "../sentry-avatar.types";
 
 export interface BrowsConfig extends PartConfig<BrowsStyle> {
   style: BrowsStyle;
-  color: string;
+  color?: string;
 }
 
 export interface BrowsProps {
