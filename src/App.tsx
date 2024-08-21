@@ -1,4 +1,4 @@
-import Face from "./components/avatar/face";
+import Face from "./components/avatar/face/face";
 import SentryAvatar from "./components/avatar/sentry-avatar";
 import AvatarPreview from "./components/editor/avatar-preview";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -188,6 +188,16 @@ function App() {
     setConfig(newConfig);
   };
 
+  const setPartStyle = <T extends AvatarPart>(
+    part: AvatarPart,
+    style: AvatarPartStyles[T]
+  ) => {
+    const newConfig = { ...config };
+    newConfig[part]!.style = style;
+
+    setConfig(newConfig);
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onDownload = (_aspectRatio: AspectRatioOption) => {
     domtoimage
@@ -249,7 +259,7 @@ function App() {
                     <AvatarGridOptions
                       values={partConfig.styles}
                       currentValue={currentPartConfig.style}
-                      setValue={() => {}}
+                      setValue={(style) => setPartStyle(part, style)}
                       render={(style) => {
                         const Component =
                           partConfig.render as React.ComponentType<

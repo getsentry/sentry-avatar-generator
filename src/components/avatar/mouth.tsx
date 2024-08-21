@@ -11,6 +11,7 @@ function Mouth({ width, height }: MouthProps) {
       viewBox="0 0 2560 2560"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="absolute top-0"
     >
       <mask
         id="mask0_2_179"

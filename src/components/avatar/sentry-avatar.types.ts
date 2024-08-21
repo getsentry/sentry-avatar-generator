@@ -1,5 +1,6 @@
 export enum FaceStyle {
   MAIN = "main",
+  SECOND = "second",
 }
 
 export enum EyesStyle {
@@ -15,4 +16,9 @@ export type PartProps<PartStyle> = {
   width?: number;
   height?: number;
   config: PartConfig<PartStyle>;
+};
+
+export type SubPartProps<PartStyle> = {
+  partProps: PartProps<PartStyle>;
+  className?: string;
 };
