@@ -1,5 +1,7 @@
-export interface EyesConfig {
-  style: "main";
+import { EyesStyle, PartConfig } from "./sentry-avatar.types";
+
+export interface EyesConfig extends PartConfig<EyesStyle> {
+  style: EyesStyle;
   color: string;
 }
 

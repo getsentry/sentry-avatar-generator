@@ -31,26 +31,137 @@ import {
   ChevronRightIcon,
 } from "@radix-ui/react-icons";
 import Eyes from "./components/avatar/eyes";
+import {
+  EyesStyle,
+  FaceStyle,
+  PartProps,
+} from "./components/avatar/sentry-avatar.types";
 
+/**
+ * Available download aspect ratio options.
+ */
 type AspectRatioOption = "9:16" | "1:1" | "16:9";
 
-const colorSwatches = {
-  face: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-  eyes: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+/**
+ * Available avatar parts.
+ */
+enum AvatarPart {
+  FACE = "face",
+  EYES = "eyes",
+}
+
+/**
+ * Mapping of available styles for each avatar part.
+ */
+type AvatarPartStyles = {
+  [AvatarPart.FACE]: FaceStyle;
+  [AvatarPart.EYES]: EyesStyle;
+};
+
+/**
+ * Render function type for displaying each body part.
+ */
+export type RenderFunction<PartStyle> = {
+  [key in AvatarPart]: React.ComponentType<PartProps<PartStyle>>;
+};
+
+/**
+ * Type definition for all avatar generator options.
+ */
+type AvatarGeneratorConfigOptions = {
+  /**
+   * Key is the body part
+   */
+  [key in AvatarPart]: {
+    /**
+     * Preset of colors available for the part.
+     */
+    colors: string[];
+    /**
+     * Default color set when the editor is first loaded.
+     */
+    defaultColor: string;
+    /**
+     * Neutral color used to display all styles available for the part.
+     */
+    neutralColor: string;
+    /**
+     * Available styles for the part.
+     */
+    styles: AvatarPartStyles[key][];
+    /**
+     * Default style for the part when the editor is first loaded.
+     */
+    defaultStyle: AvatarPartStyles[key];
+    /**
+     * React component used to render this part.
+     */
+    render: RenderFunction<AvatarPartStyles[key]>[key];
+  };
+};
+
+/**
+ * Type definition for how the avatar config is stored.
+ */
+type AvatarConfig = {
+  [key in AvatarPart]: {
+    color: string;
+    style: AvatarPartStyles[key];
+  };
+};
+
+const configOptions: AvatarGeneratorConfigOptions = {
+  face: {
+    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+    defaultColor: "#F2E39F",
+    neutralColor: "#8E8E8E",
+    styles: Object.values(FaceStyle),
+    defaultStyle: Object.values(FaceStyle)[0],
+    render: Face,
+  },
+  eyes: {
+    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+    defaultColor: "#F2E39F",
+    neutralColor: "#444444",
+    styles: Object.values(EyesStyle),
+    defaultStyle: Object.values(EyesStyle)[0],
+    render: Eyes,
+  },
+};
+
+const tabs: { name: string; value: string }[] = [
+  { name: "Face", value: "face" },
+  { name: "Eyes", value: "eyes" },
+  // { name: "Hair", value: "hair" },
+  // { name: "Nose", value: "nose" },
+  // { name: "Mouth", value: "mouth" },
+  // { name: "Facial", value: "facial" },
+  // { name: "Accessories", value: "accessories" },
+];
+
+/**
+ * Generates the default config for the avatar based on all part default config values.
+ *
+ * @returns an AvatarConfig object with all parts defined with its default values.
+ */
+const generateDefaultConfig = (): AvatarConfig => {
+  const defaultConfig: AvatarConfig = {} as AvatarConfig;
+
+  for (const option in configOptions) {
+    const part = option as keyof AvatarConfig;
+    const partConfig = configOptions[part];
+
+    (defaultConfig[part] as unknown) = {
+      color: partConfig.defaultColor,
+      style: partConfig.defaultStyle,
+    };
+  }
+
+  return defaultConfig;
 };
 
 function App() {
   const [currentTab, setCurrentTab] = useState("face");
-
-  const tabs: { name: string; value: string }[] = [
-    { name: "Face", value: "face" },
-    { name: "Eyes", value: "eyes" },
-    { name: "Hair", value: "hair" },
-    { name: "Nose", value: "nose" },
-    { name: "Mouth", value: "mouth" },
-    { name: "Facial", value: "facial" },
-    { name: "Accessories", value: "accessories" },
-  ];
 
   const currentIndex = tabs.findIndex((tab) => tab.value === currentTab);
   const hasPrevious = currentIndex > 0;
@@ -68,8 +179,14 @@ function App() {
     setCurrentTab(tabs[nextIndex].value);
   };
 
-  const [faceColor, setFaceColor] = useState<string>("#FDFAF3");
-  const [eyeColor, setEyeColor] = useState<string>("#FDFAF3");
+  const [config, setConfig] = useState<AvatarConfig>(generateDefaultConfig());
+
+  const setPartColor = (part: AvatarPart, color: string) => {
+    const newConfig = { ...config };
+    newConfig[part]!.color = color;
+
+    setConfig(newConfig);
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onDownload = (_aspectRatio: AspectRatioOption) => {
@@ -88,8 +205,14 @@ function App() {
             <AvatarPreview id="avatar-preview">
               <SentryAvatar
                 config={{
-                  face: { color: faceColor, style: "main" },
-                  eyes: { color: eyeColor, style: "main" },
+                  face: {
+                    color: config[AvatarPart.FACE]!.color,
+                    style: config[AvatarPart.FACE]!.style,
+                  },
+                  eyes: {
+                    color: config[AvatarPart.EYES]!.color,
+                    style: config[AvatarPart.EYES]!.style,
+                  },
                 }}
               />
             </AvatarPreview>
@@ -115,43 +238,38 @@ function App() {
                 <ScrollBar orientation="horizontal" />
               </ScrollArea>
 
-              <TabsContent value="face" className="grow">
-                <TabSectionLabel>Style</TabSectionLabel>
-                <AvatarGridOptions
-                  values={["main"]}
-                  currentValue={"main"}
-                  setValue={() => {}}
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  render={(_face) => (
-                    <Face config={{ style: "main", color: "#8E8E8E" }} />
-                  )}
-                />
-                <TabSectionLabel>Color</TabSectionLabel>
-                <AvatarColorOptions
-                  colors={colorSwatches.face}
-                  currentColor={faceColor}
-                  setColor={setFaceColor}
-                />
-              </TabsContent>
+              {tabs.map(({ value }) => {
+                const part = value as AvatarPart;
+                const partConfig = configOptions[part];
+                const currentPartConfig = config[part]!;
 
-              <TabsContent value="eyes" className="grow">
-                <TabSectionLabel>Style</TabSectionLabel>
-                <AvatarGridOptions
-                  values={["main"]}
-                  currentValue={"main"}
-                  setValue={() => {}}
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  render={(_face) => (
-                    <Eyes config={{ style: "main", color: "#8E8E8E" }} />
-                  )}
-                />
-                <TabSectionLabel>Color</TabSectionLabel>
-                <AvatarColorOptions
-                  colors={colorSwatches.eyes}
-                  currentColor={eyeColor}
-                  setColor={setEyeColor}
-                />
-              </TabsContent>
+                return (
+                  <TabsContent key={part} value={part} className="grow">
+                    <TabSectionLabel>Style</TabSectionLabel>
+                    <AvatarGridOptions
+                      values={partConfig.styles}
+                      currentValue={currentPartConfig.style}
+                      setValue={() => {}}
+                      render={(style) => {
+                        const Component =
+                          partConfig.render as React.ComponentType<
+                            PartProps<unknown>
+                          >;
+
+                        return (
+                          <Component config={{ style, color: "#8E8E8E" }} />
+                        );
+                      }}
+                    />
+                    <TabSectionLabel>Color</TabSectionLabel>
+                    <AvatarColorOptions
+                      colors={partConfig.colors}
+                      currentColor={currentPartConfig.color}
+                      setColor={(color) => setPartColor(part, color)}
+                    />
+                  </TabsContent>
+                );
+              })}
 
               <div>
                 {hasPrevious && (

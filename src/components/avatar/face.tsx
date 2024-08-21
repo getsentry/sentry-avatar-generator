@@ -1,9 +1,11 @@
-export interface FaceConfig {
-  style: "main";
+import { FaceStyle, PartConfig, PartProps } from "./sentry-avatar.types";
+
+export interface FaceConfig extends PartConfig<FaceStyle> {
+  style: FaceStyle;
   color: string;
 }
 
-export interface FaceProps {
+export interface FaceProps extends PartProps<FaceStyle> {
   width?: number;
   height?: number;
   config: FaceConfig;
