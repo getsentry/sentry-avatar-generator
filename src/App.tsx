@@ -35,9 +35,11 @@ import {
   BrowsStyle,
   EyesStyle,
   FaceStyle,
+  MouthStyle,
   PartProps,
 } from "./components/avatar/sentry-avatar.types";
 import Brows from "./components/avatar/brows/brows";
+import Mouth from "./components/avatar/mouth/mouth";
 
 /**
  * Available download aspect ratio options.
@@ -51,6 +53,7 @@ enum AvatarPart {
   FACE = "face",
   EYES = "eyes",
   BROWS = "brows",
+  MOUTH = "mouth",
 }
 
 /**
@@ -60,6 +63,7 @@ type AvatarPartStyles = {
   [AvatarPart.FACE]: FaceStyle;
   [AvatarPart.EYES]: EyesStyle;
   [AvatarPart.BROWS]: BrowsStyle;
+  [AvatarPart.MOUTH]: MouthStyle;
 };
 
 /**
@@ -116,16 +120,16 @@ type AvatarConfig = {
 
 const configOptions: AvatarGeneratorConfigOptions = {
   [AvatarPart.FACE]: {
-    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-    defaultColor: "#F2E39F",
+    colors: ["#eed6cb", "#e6c3b3", "#d29779", "#c06a3f", "#864a2d", "#4d2a1a"],
+    defaultColor: "#d29779",
     neutralColor: "#8E8E8E",
     styles: Object.values(FaceStyle),
     defaultStyle: Object.values(FaceStyle)[0],
     render: Face,
   },
   [AvatarPart.EYES]: {
-    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-    defaultColor: "#F2E39F",
+    colors: ["#475676", "#7f8e91", "#54513e", "#5a381c", "#19110f"],
+    defaultColor: "#54513e",
     neutralColor: "#444444",
     styles: Object.values(EyesStyle),
     defaultStyle: Object.values(EyesStyle)[0],
@@ -133,11 +137,19 @@ const configOptions: AvatarGeneratorConfigOptions = {
   },
   [AvatarPart.BROWS]: {
     colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-    defaultColor: "#F2E39F",
+    defaultColor: "#0E0705",
     neutralColor: "#444444",
     styles: Object.values(BrowsStyle),
     defaultStyle: Object.values(BrowsStyle)[0],
     render: Brows,
+  },
+  [AvatarPart.MOUTH]: {
+    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+    defaultColor: "#F2E39F",
+    neutralColor: "#444444",
+    styles: Object.values(MouthStyle),
+    defaultStyle: Object.values(MouthStyle)[0],
+    render: Mouth,
   },
 };
 
@@ -147,7 +159,7 @@ const tabs: { name: string; value: string }[] = [
   { name: "Brows", value: "brows" },
   // { name: "Hair", value: "hair" },
   // { name: "Nose", value: "nose" },
-  // { name: "Mouth", value: "mouth" },
+  { name: "Mouth", value: "mouth" },
   // { name: "Facial", value: "facial" },
   // { name: "Accessories", value: "accessories" },
 ];
@@ -239,6 +251,10 @@ function App() {
                   brows: {
                     color: config[AvatarPart.BROWS]!.color,
                     style: config[AvatarPart.BROWS]!.style,
+                  },
+                  mouth: {
+                    color: config[AvatarPart.MOUTH]!.color,
+                    style: config[AvatarPart.MOUTH]!.style,
                   },
                 }}
               />

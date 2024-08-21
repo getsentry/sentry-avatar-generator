@@ -25,6 +25,15 @@ export enum BrowsStyle {
   SIXTH = "sixth",
 }
 
+export enum MouthStyle {
+  FIRST = "first",
+  SECOND = "second",
+  THIRD = "third",
+  FOURTH = "fourth",
+  FIFTH = "fifth",
+  SIXTH = "sixth",
+}
+
 export type PartConfig<PartStyle> = {
   style: PartStyle;
   color: string;
