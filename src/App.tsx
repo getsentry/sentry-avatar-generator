@@ -33,6 +33,7 @@ import {
 import Eyes from "./components/avatar/eyes/eyes";
 import {
   BrowsStyle,
+  EarStyle,
   EyesStyle,
   FaceStyle,
   MouthStyle,
@@ -41,6 +42,7 @@ import {
 import Brows from "./components/avatar/brows/brows";
 import Mouth from "./components/avatar/mouth/mouth";
 import { toast, Toaster } from "sonner";
+import Ear from "./components/avatar/ear/ear";
 
 /**
  * Available download aspect ratio options.
@@ -55,6 +57,7 @@ enum AvatarPart {
   EYES = "eyes",
   BROWS = "brows",
   MOUTH = "mouth",
+  EAR = "ear",
 }
 
 /**
@@ -65,6 +68,7 @@ type AvatarPartStyles = {
   [AvatarPart.EYES]: EyesStyle;
   [AvatarPart.BROWS]: BrowsStyle;
   [AvatarPart.MOUTH]: MouthStyle;
+  [AvatarPart.EAR]: EarStyle;
 };
 
 /**
@@ -150,12 +154,19 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(MouthStyle)[0],
     render: Mouth,
   },
+  [AvatarPart.EAR]: {
+    neutralColor: "#444444",
+    styles: Object.values(EarStyle),
+    defaultStyle: Object.values(EarStyle)[0],
+    render: Ear,
+  },
 };
 
 const tabs: { name: string; value: string }[] = [
   { name: "Face", value: "face" },
   { name: "Eyes", value: "eyes" },
   { name: "Brows", value: "brows" },
+  { name: "Ear", value: "ear" },
   // { name: "Hair", value: "hair" },
   // { name: "Nose", value: "nose" },
   { name: "Mouth", value: "mouth" },
@@ -202,7 +213,7 @@ const decodeQueryString = () => {
     if (config) {
       const decodedConfig = JSON.parse(atob(config));
 
-      return decodedConfig;
+      return { ...generateDefaultConfig(), ...decodedConfig };
     }
   } catch {
     toast.error("Unable to load shared avatar.");
@@ -300,8 +311,10 @@ function App() {
                     style: config[AvatarPart.BROWS]!.style,
                   },
                   mouth: {
-                    color: config[AvatarPart.MOUTH]!.color,
                     style: config[AvatarPart.MOUTH]!.style,
+                  },
+                  ear: {
+                    style: config[AvatarPart.EAR]!.style,
                   },
                 }}
               />
