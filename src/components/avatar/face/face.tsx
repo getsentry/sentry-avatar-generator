@@ -17,9 +17,9 @@ export interface FaceProps extends PartProps<FaceStyle> {
 function Face(props: FaceProps) {
   return (
     <>
-      <FaceBase partProps={props} className="absolute top-0 order-1" />
-      <FaceShadow partProps={props} className="absolute top-0 order-1" />
-      <FaceHighlight partProps={props} className="absolute top-0 order-1" />
+      <FaceBase partProps={props} className="absolute top-0 z-10" />
+      <FaceShadow partProps={props} className="absolute top-0 z-10" />
+      <FaceHighlight partProps={props} className="absolute top-0 z-10" />
     </>
   );
 }

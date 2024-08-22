@@ -1,6 +1,7 @@
 import { darkenHexColor } from "@/lib/utils";
 import { MouthStyle, PartConfig, PartProps } from "../sentry-avatar.types";
 import classes from "./mouth.module.css";
+import BaseSvg from "@/components/avatar/base-svg";
 
 const MOUTH_DARKENED_PERCENTAGE = 30;
 
@@ -15,19 +16,19 @@ export interface MouthProps extends PartProps<MouthStyle> {
   faceColor?: string;
 }
 
-function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
+function Mouth({
+  width,
+  height,
+  faceColor,
+  className,
+  config: { style },
+}: MouthProps) {
   faceColor = faceColor ?? "#000";
 
   switch (style) {
     case MouthStyle.FIRST:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.cls3}>
             <g id="Mouth">
               <g id="Mouth_1">
@@ -60,18 +61,12 @@ function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case MouthStyle.SECOND:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.cls3}>
             <g id="Mouth">
               <g id="Mouth_2">
@@ -99,18 +94,12 @@ function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case MouthStyle.THIRD:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.cls3}>
             <g id="Mouth">
               <g id="Mouth_3">
@@ -138,18 +127,12 @@ function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case MouthStyle.FOURTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.cls3}>
             <g id="Mouth">
               <g id="Mouth_4">
@@ -172,18 +155,12 @@ function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case MouthStyle.FIFTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.cls3}>
             <g id="Mouth">
               <g id="Mouth_5">
@@ -206,18 +183,12 @@ function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case MouthStyle.SIXTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.cls3}>
             <g id="Mouth">
               <g id="Mouth_6">
@@ -245,7 +216,7 @@ function Mouth({ width, height, faceColor, config: { style } }: MouthProps) {
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
   }
 }

@@ -1,6 +1,11 @@
 import { darkenHexColor } from "@/lib/utils";
-import { EyesStyle, PartConfig, PartProps } from "../sentry-avatar.types";
 import classes from "./eyes.module.css";
+import BaseSvg from "@/components/avatar/base-svg";
+import {
+  EyesStyle,
+  PartConfig,
+  PartProps,
+} from "@/components/avatar/sentry-avatar.types";
 
 const EYES_DARKENED_PERCENTAGE = 30;
 
@@ -21,19 +26,14 @@ function Eyes({
   height,
   faceColor,
   config: { color, style },
+  className,
 }: EyesProps) {
   faceColor = faceColor ?? "#000";
 
   switch (style) {
     case EyesStyle.FIRST:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.eyesIsolation}>
             <g id="Eyes">
               <g id="Eyes_1">
@@ -86,18 +86,12 @@ function Eyes({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case EyesStyle.SECOND:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.eyesIsolation}>
             <g id="Eyes">
               <g id="Eyes_2">
@@ -140,18 +134,12 @@ function Eyes({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case EyesStyle.THIRD:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.eyesIsolation}>
             <g id="Eyes">
               <g id="Eyes_3">
@@ -204,18 +192,12 @@ function Eyes({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case EyesStyle.FOURTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.eyesIsolation}>
             <g id="Eyes">
               <g id="Eyes_4">
@@ -278,18 +260,12 @@ function Eyes({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case EyesStyle.FIFTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.eyesIsolation}>
             <g id="Eyes">
               <g id="Eyes_5">
@@ -336,18 +312,12 @@ function Eyes({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case EyesStyle.SIXTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className="absolute top-0"
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g className={classes.eyesIsolation}>
             <g id="Eyes">
               <g id="Eyes_6">
@@ -390,7 +360,7 @@ function Eyes({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
   }
 }

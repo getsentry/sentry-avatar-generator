@@ -1,4 +1,8 @@
-import { FaceStyle, SubPartProps } from "../sentry-avatar.types";
+import BaseSvg from "@/components/avatar/base-svg";
+import {
+  SubPartProps,
+  FaceStyle,
+} from "@/components/avatar/sentry-avatar.types";
 
 function FaceHighlight({
   partProps: {
@@ -11,13 +15,7 @@ function FaceHighlight({
   switch (style) {
     case FaceStyle.FIRST:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <defs>
             <style>
               {`
@@ -43,17 +41,11 @@ function FaceHighlight({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
     case FaceStyle.SECOND:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <defs>
             <style>
               {`
@@ -80,17 +72,11 @@ function FaceHighlight({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
     case FaceStyle.THIRD:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <defs>
             <style>
               {`
@@ -115,18 +101,12 @@ function FaceHighlight({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case FaceStyle.FOURTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <defs>
             <style>
               {`
@@ -151,18 +131,12 @@ function FaceHighlight({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case FaceStyle.FIFTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <defs>
             <style>
               {`
@@ -188,18 +162,12 @@ function FaceHighlight({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
 
     case FaceStyle.SIXTH:
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <defs>
             <style>
               {`
@@ -225,7 +193,7 @@ function FaceHighlight({
               </g>
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
   }
 }

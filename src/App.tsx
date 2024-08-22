@@ -36,6 +36,7 @@ import {
   EarStyle,
   EyesStyle,
   FaceStyle,
+  HairStyle,
   MouthStyle,
   PartProps,
 } from "./components/avatar/sentry-avatar.types";
@@ -43,6 +44,7 @@ import Brows from "./components/avatar/brows/brows";
 import Mouth from "./components/avatar/mouth/mouth";
 import { toast, Toaster } from "sonner";
 import Ear from "./components/avatar/ear/ear";
+import Hair from "./components/avatar/hair/hair";
 
 /**
  * Available download aspect ratio options.
@@ -58,6 +60,7 @@ enum AvatarPart {
   BROWS = "brows",
   MOUTH = "mouth",
   EAR = "ear",
+  HAIR = "hair",
 }
 
 /**
@@ -69,6 +72,7 @@ type AvatarPartStyles = {
   [AvatarPart.BROWS]: BrowsStyle;
   [AvatarPart.MOUTH]: MouthStyle;
   [AvatarPart.EAR]: EarStyle;
+  [AvatarPart.HAIR]: HairStyle;
 };
 
 /**
@@ -160,14 +164,22 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(EarStyle)[0],
     render: Ear,
   },
+  [AvatarPart.HAIR]: {
+    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
+    defaultColor: "#0E0705",
+    neutralColor: "#444444",
+    styles: Object.values(HairStyle),
+    defaultStyle: Object.values(HairStyle)[0],
+    render: Hair,
+  },
 };
 
 const tabs: { name: string; value: string }[] = [
   { name: "Face", value: "face" },
+  { name: "Hair", value: "hair" },
   { name: "Eyes", value: "eyes" },
   { name: "Brows", value: "brows" },
   { name: "Ear", value: "ear" },
-  // { name: "Hair", value: "hair" },
   // { name: "Nose", value: "nose" },
   { name: "Mouth", value: "mouth" },
   // { name: "Facial", value: "facial" },
@@ -301,6 +313,10 @@ function App() {
                   face: {
                     color: config[AvatarPart.FACE]!.color,
                     style: config[AvatarPart.FACE]!.style,
+                  },
+                  hair: {
+                    color: config[AvatarPart.HAIR]!.color,
+                    style: config[AvatarPart.HAIR]!.style,
                   },
                   eyes: {
                     color: config[AvatarPart.EYES]!.color,

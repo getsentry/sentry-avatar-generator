@@ -1,5 +1,9 @@
+import BaseSvg from "@/components/avatar/base-svg";
+import {
+  SubPartProps,
+  FaceStyle,
+} from "@/components/avatar/sentry-avatar.types";
 import { darkenHexColor } from "@/lib/utils";
-import { FaceStyle, SubPartProps } from "../sentry-avatar.types";
 
 const FACE_SHADOW_DARKENED_PERCENTAGE = 10;
 
@@ -16,14 +20,7 @@ function FaceShadow({
   switch (style) {
     case FaceStyle.FIRST:
       return (
-        <svg
-          id="Face"
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g id="Face_1">
             <g id="Shadow">
               <polygon
@@ -36,18 +33,11 @@ function FaceShadow({
               />
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
     case FaceStyle.SECOND:
       return (
-        <svg
-          id="Face"
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g id="Face_2">
             <g id="Tones">
               <polygon
@@ -60,7 +50,7 @@ function FaceShadow({
               />
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
     case FaceStyle.THIRD:
       return (
@@ -88,14 +78,7 @@ function FaceShadow({
       );
     case FaceStyle.FOURTH:
       return (
-        <svg
-          id="Face"
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g id="Face_4">
             <g id="Tones">
               <polygon
@@ -108,18 +91,11 @@ function FaceShadow({
               />
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
     case FaceStyle.FIFTH:
       return (
-        <svg
-          id="Face"
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g id="Face_5">
             <g id="Tones">
               <polygon
@@ -135,18 +111,11 @@ function FaceShadow({
               />
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
     case FaceStyle.SIXTH:
       return (
-        <svg
-          id="Face"
-          xmlns="http://www.w3.org/2000/svg"
-          width={width}
-          height={height}
-          viewBox="0 0 1920 1920"
-          className={className}
-        >
+        <BaseSvg width={width} height={height} className={className}>
           <g id="Face_6">
             <g id="Tones">
               <polygon
@@ -162,7 +131,7 @@ function FaceShadow({
               />
             </g>
           </g>
-        </svg>
+        </BaseSvg>
       );
   }
 }
