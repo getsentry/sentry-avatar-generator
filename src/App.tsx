@@ -192,8 +192,8 @@ const configOptions: AvatarGeneratorConfigOptions = {
     render: Ear,
   },
   [AvatarPart.HAIR]: {
-    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-    defaultColor: "#0E0705",
+    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#2d241c"],
+    defaultColor: "#2d241c",
     neutralColor: "#444444",
     styles: Object.values(HairStyle),
     defaultStyle: Object.values(HairStyle)[0],
