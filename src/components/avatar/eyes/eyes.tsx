@@ -3,33 +3,24 @@ import classes from "./eyes.module.css";
 import BaseSvg from "@/components/avatar/base-svg";
 import {
   EyesStyle,
-  PartConfig,
+  PartConfigWithColor,
+  PartConfigWithFaceColor,
   PartProps,
 } from "@/components/avatar/sentry-avatar.types";
 
 const EYES_DARKENED_PERCENTAGE = 30;
 
-export interface EyesConfig extends PartConfig<EyesStyle> {
-  style: EyesStyle;
-  color?: string;
-}
-
-export interface EyesProps extends PartProps<EyesStyle> {
-  width?: number;
-  height?: number;
-  config: EyesConfig;
-  faceColor?: string;
-}
+export interface EyesConfig
+  extends PartConfigWithFaceColor<EyesStyle>,
+    PartConfigWithColor<EyesStyle> {}
+export type EyesProps = PartProps<EyesConfig, EyesStyle>;
 
 function Eyes({
   width,
   height,
-  faceColor,
-  config: { color, style },
+  config: { color, style, faceColor },
   className,
 }: EyesProps) {
-  faceColor = faceColor ?? "#000";
-
   switch (style) {
     case EyesStyle.FIRST:
       return (

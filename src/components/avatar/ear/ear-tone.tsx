@@ -4,6 +4,7 @@ import {
   SubPartProps,
   EarStyle,
 } from "@/components/avatar/sentry-avatar.types";
+import { EarConfig } from "@/components/avatar/ear/ear";
 
 const EAR_DARKENED_PERCENTAGE = 30;
 
@@ -11,13 +12,10 @@ function EarTone({
   partProps: {
     width,
     height,
-    config: { style },
-    faceColor,
+    config: { style, faceColor },
   },
   className,
-}: SubPartProps<EarStyle>) {
-  faceColor = faceColor ?? "#000";
-
+}: SubPartProps<EarConfig, EarStyle>) {
   switch (style) {
     case EarStyle.FIRST:
       return (

@@ -1,4 +1,4 @@
-import Face from "./components/avatar/face/face";
+import Face, { FaceProps } from "./components/avatar/face/face";
 import SentryAvatar from "./components/avatar/sentry-avatar";
 import AvatarPreview from "./components/editor/avatar-preview";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -30,7 +30,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@radix-ui/react-icons";
-import Eyes from "./components/avatar/eyes/eyes";
+import Eyes, { EyesProps } from "./components/avatar/eyes/eyes";
 import {
   BrowsStyle,
   EarStyle,
@@ -38,13 +38,12 @@ import {
   FaceStyle,
   HairStyle,
   MouthStyle,
-  PartProps,
 } from "./components/avatar/sentry-avatar.types";
-import Brows from "./components/avatar/brows/brows";
-import Mouth from "./components/avatar/mouth/mouth";
+import Brows, { BrowsProps } from "./components/avatar/brows/brows";
+import Mouth, { MouthProps } from "./components/avatar/mouth/mouth";
 import { toast, Toaster } from "sonner";
-import Ear from "./components/avatar/ear/ear";
-import Hair from "./components/avatar/hair/hair";
+import Ear, { EarProps } from "./components/avatar/ear/ear";
+import Hair, { HairProps } from "./components/avatar/hair/hair";
 
 /**
  * Available download aspect ratio options.
@@ -76,10 +75,22 @@ type AvatarPartStyles = {
 };
 
 /**
+ * Mapping of props needed for each avatar part.
+ */
+type AvatarPartProps = {
+  [AvatarPart.FACE]: FaceProps;
+  [AvatarPart.EYES]: EyesProps;
+  [AvatarPart.BROWS]: BrowsProps;
+  [AvatarPart.MOUTH]: MouthProps;
+  [AvatarPart.EAR]: EarProps;
+  [AvatarPart.HAIR]: HairProps;
+};
+
+/**
  * Render function type for displaying each body part.
  */
-export type RenderFunction<PartStyle> = {
-  [key in AvatarPart]: React.ComponentType<PartProps<PartStyle>>;
+export type RenderFunction<Props extends AvatarPartProps[AvatarPart]> = {
+  [key in AvatarPart]: React.ComponentType<Props>;
 };
 
 /**
@@ -113,7 +124,7 @@ type AvatarGeneratorConfigOptions = {
     /**
      * React component used to render this part.
      */
-    render: RenderFunction<AvatarPartStyles[key]>[key];
+    render: RenderFunction<AvatarPartProps[key]>[key];
   };
 };
 
@@ -319,15 +330,19 @@ function App() {
                   eyes: {
                     color: config[AvatarPart.EYES]!.color,
                     style: config[AvatarPart.EYES]!.style,
+                    faceColor: config[AvatarPart.FACE]!.color,
                   },
                   brows: {
                     style: config[AvatarPart.BROWS]!.style,
+                    hairColor: config[AvatarPart.HAIR]!.color,
                   },
                   mouth: {
                     style: config[AvatarPart.MOUTH]!.style,
+                    faceColor: config[AvatarPart.FACE]!.color,
                   },
                   ear: {
                     style: config[AvatarPart.EAR]!.style,
+                    faceColor: config[AvatarPart.FACE]!.color,
                   },
                 }}
               />
@@ -368,12 +383,18 @@ function App() {
                       setValue={(style) => setPartStyle(part, style)}
                       render={(style) => {
                         const Component =
-                          partConfig.render as React.ComponentType<
-                            PartProps<unknown>
-                          >;
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                          partConfig.render as React.ComponentType<any>;
 
                         return (
-                          <Component config={{ style, color: "#8E8E8E" }} />
+                          <Component
+                            config={{
+                              style,
+                              color: "#8E8E8E",
+                              faceColor: "#8E8E8E",
+                              hairColor: "#8E8E8E",
+                            }}
+                          />
                         );
                       }}
                     />

@@ -1,21 +1,18 @@
 import EarBase from "@/components/avatar/ear/ear-base";
 import EarTone from "@/components/avatar/ear/ear-tone";
 import {
-  PartConfig,
   EarStyle,
   PartProps,
+  PartConfigWithFaceColor,
 } from "@/components/avatar/sentry-avatar.types";
 import { cn } from "@/lib/utils";
 
-export interface EarConfig extends PartConfig<EarStyle> {
-  style: EarStyle;
-}
+export type EarConfig = PartConfigWithFaceColor<EarStyle>;
 
-export interface EarProps extends PartProps<EarStyle> {
+export interface EarProps extends PartProps<EarConfig, EarStyle> {
   width?: number;
   height?: number;
   config: EarConfig;
-  faceColor?: string;
 }
 
 function Ear(props: EarProps) {

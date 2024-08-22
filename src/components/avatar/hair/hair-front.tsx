@@ -5,6 +5,7 @@ import {
   SubPartProps,
 } from "@/components/avatar/sentry-avatar.types";
 import BaseSvg from "@/components/avatar/base-svg";
+import { HairConfig } from "@/components/avatar/hair/hair";
 
 const HAIR_DARKENED_PERCENTAGE = 10;
 
@@ -15,9 +16,7 @@ function HairFront({
     config: { style, color },
   },
   className,
-}: SubPartProps<HairStyle>) {
-  color = color ?? "#000";
-
+}: SubPartProps<HairConfig, HairStyle>) {
   switch (style) {
     case HairStyle.FIRST:
       return (

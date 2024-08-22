@@ -52,21 +52,34 @@ export enum HairStyle {
   SIXTH = "sixth",
 }
 
-export type PartConfig<PartStyle> = {
+export type PartConfigWithColor<PartStyle> = {
   style: PartStyle;
-  color?: string;
+  color: string;
 };
 
-export type PartProps<PartStyle> = {
+export type PartConfigWithFaceColor<PartStyle> = {
+  style: PartStyle;
+  faceColor: string;
+};
+
+export type PartConfigWithHairColor<PartStyle> = {
+  style: PartStyle;
+  hairColor: string;
+};
+
+export type PartConfig<PartStyle> =
+  | PartConfigWithColor<PartStyle>
+  | PartConfigWithFaceColor<PartStyle>
+  | PartConfigWithHairColor<PartStyle>;
+
+export type PartProps<P extends PartConfig<PartStyle>, PartStyle> = {
   width?: number;
   height?: number;
-  config: PartConfig<PartStyle>;
-  faceColor?: string;
-  hairColor?: string;
+  config: P;
   className?: string;
 };
 
-export type SubPartProps<PartStyle> = {
-  partProps: PartProps<PartStyle>;
+export type SubPartProps<P extends PartConfig<PartStyle>, PartStyle> = {
+  partProps: PartProps<P, PartStyle>;
   className?: string;
 };

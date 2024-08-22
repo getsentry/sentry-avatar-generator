@@ -1,26 +1,17 @@
 import BaseSvg from "@/components/avatar/base-svg";
 import {
-  PartConfig,
   BrowsStyle,
   PartProps,
+  PartConfigWithHairColor,
 } from "@/components/avatar/sentry-avatar.types";
 
-export interface BrowsConfig extends PartConfig<BrowsStyle> {
-  style: BrowsStyle;
-}
-
-export interface BrowsProps extends PartProps<BrowsStyle> {
-  width?: number;
-  height?: number;
-  config: BrowsConfig;
-  hairColor?: string;
-}
+export type BrowsConfig = PartConfigWithHairColor<BrowsStyle>;
+export type BrowsProps = PartProps<BrowsConfig, BrowsStyle>;
 
 function Brows({
   width,
   height,
-  config: { style },
-  hairColor,
+  config: { style, hairColor },
   className,
 }: BrowsProps) {
   switch (style) {

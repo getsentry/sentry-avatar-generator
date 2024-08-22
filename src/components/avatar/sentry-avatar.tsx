@@ -39,7 +39,6 @@ function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
         width={512}
         height={512}
         config={config.ear}
-        faceColor={config.face.color}
         className="absolute top-0 z-10"
       />
       <Face
@@ -52,21 +51,18 @@ function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
         width={512}
         height={512}
         config={config.mouth}
-        faceColor={config.face.color}
         className="absolute top-0 z-40"
       />
       <Eyes
         width={512}
         height={512}
         config={config.eyes}
-        faceColor={config.face.color}
         className="absolute top-0 z-[60]"
       />
       <Brows
         width={512}
         height={512}
         config={config.brows}
-        hairColor={config.hair.color}
         className="absolute top-0 z-[80]"
       />
     </div>

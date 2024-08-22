@@ -1,4 +1,5 @@
 import BaseSvg from "@/components/avatar/base-svg";
+import { FaceConfig } from "@/components/avatar/face/face";
 import {
   SubPartProps,
   FaceStyle,
@@ -11,7 +12,7 @@ function FaceHighlight({
     config: { style },
   },
   className,
-}: SubPartProps<FaceStyle>) {
+}: SubPartProps<FaceConfig, FaceStyle>) {
   switch (style) {
     case FaceStyle.FIRST:
       return (

@@ -1,4 +1,5 @@
 import BaseSvg from "@/components/avatar/base-svg";
+import { EarConfig } from "@/components/avatar/ear/ear";
 import {
   SubPartProps,
   EarStyle,
@@ -8,11 +9,10 @@ function EarBase({
   partProps: {
     width,
     height,
-    config: { style },
-    faceColor,
+    config: { style, faceColor },
   },
   className,
-}: SubPartProps<EarStyle>) {
+}: SubPartProps<EarConfig, EarStyle>) {
   switch (style) {
     case EarStyle.FIRST:
       return (

@@ -1,4 +1,5 @@
 import BaseSvg from "@/components/avatar/base-svg";
+import { FaceConfig } from "@/components/avatar/face/face";
 import {
   SubPartProps,
   FaceStyle,
@@ -14,9 +15,7 @@ function FaceShadow({
     config: { color, style },
   },
   className,
-}: SubPartProps<FaceStyle>) {
-  color = color ?? "#000";
-
+}: SubPartProps<FaceConfig, FaceStyle>) {
   switch (style) {
     case FaceStyle.FIRST:
       return (
