@@ -52,6 +52,15 @@ export enum HairStyle {
   SIXTH = "sixth",
 }
 
+export enum NoseStyle {
+  FIRST = "first",
+  SECOND = "second",
+  THIRD = "third",
+  FOURTH = "fourth",
+  FIFTH = "fifth",
+  SIXTH = "sixth",
+}
+
 export type PartConfigWithColor<PartStyle> = {
   style: PartStyle;
   color: string;

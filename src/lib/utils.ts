@@ -26,3 +26,30 @@ export function darkenHexColor(hex: string, percent: number) {
     .toUpperCase()}`;
   return darkenedHex;
 }
+
+export function lightenHexColor(hex: string, percent: number): string {
+  // Ensure the hex string is in the proper format
+  let normalizedHex = hex.replace(/^#/, "");
+  if (normalizedHex.length === 3) {
+    normalizedHex = normalizedHex
+      .split("")
+      .map((char) => char + char)
+      .join("");
+  }
+
+  // Convert the hex string to RGB values
+  const r = parseInt(normalizedHex.substring(0, 2), 16);
+  const g = parseInt(normalizedHex.substring(2, 4), 16);
+  const b = parseInt(normalizedHex.substring(4, 6), 16);
+
+  // Calculate the new RGB values after lightening
+  const newR = Math.min(255, Math.floor(r + (255 - r) * (percent / 100)));
+  const newG = Math.min(255, Math.floor(g + (255 - g) * (percent / 100)));
+  const newB = Math.min(255, Math.floor(b + (255 - b) * (percent / 100)));
+
+  // Convert the new RGB values back to a hex string
+  const toHex = (value: number) => value.toString(16).padStart(2, "0");
+  const newHex = `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`;
+
+  return newHex;
+}

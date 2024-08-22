@@ -1,3 +1,4 @@
+import Nose, { NoseConfig } from "@/components/avatar/nose/nose";
 import Brows, { BrowsConfig } from "./brows/brows";
 import Ear, { EarConfig } from "./ear/ear";
 import Eyes, { EyesConfig } from "./eyes/eyes";
@@ -12,6 +13,7 @@ export interface SentryAvatarConfig {
   mouth: MouthConfig;
   ear: EarConfig;
   hair: HairConfig;
+  nose: NoseConfig;
 }
 
 // Layers:
@@ -57,6 +59,12 @@ function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
         width={512}
         height={512}
         config={config.eyes}
+        className="absolute top-0 z-[60]"
+      />
+      <Nose
+        width={512}
+        height={512}
+        config={config.nose}
         className="absolute top-0 z-[60]"
       />
       <Brows

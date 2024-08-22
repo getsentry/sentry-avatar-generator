@@ -38,12 +38,14 @@ import {
   FaceStyle,
   HairStyle,
   MouthStyle,
+  NoseStyle,
 } from "./components/avatar/sentry-avatar.types";
 import Brows, { BrowsProps } from "./components/avatar/brows/brows";
 import Mouth, { MouthProps } from "./components/avatar/mouth/mouth";
 import { toast, Toaster } from "sonner";
 import Ear, { EarProps } from "./components/avatar/ear/ear";
 import Hair, { HairProps } from "./components/avatar/hair/hair";
+import Nose, { NoseProps } from "@/components/avatar/nose/nose";
 
 /**
  * Available download aspect ratio options.
@@ -60,6 +62,7 @@ enum AvatarPart {
   MOUTH = "mouth",
   EAR = "ear",
   HAIR = "hair",
+  NOSE = "nose",
 }
 
 /**
@@ -72,6 +75,7 @@ type AvatarPartStyles = {
   [AvatarPart.MOUTH]: MouthStyle;
   [AvatarPart.EAR]: EarStyle;
   [AvatarPart.HAIR]: HairStyle;
+  [AvatarPart.NOSE]: NoseStyle;
 };
 
 /**
@@ -84,6 +88,7 @@ type AvatarPartProps = {
   [AvatarPart.MOUTH]: MouthProps;
   [AvatarPart.EAR]: EarProps;
   [AvatarPart.HAIR]: HairProps;
+  [AvatarPart.NOSE]: NoseProps;
 };
 
 /**
@@ -167,6 +172,12 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(MouthStyle)[0],
     render: Mouth,
   },
+  [AvatarPart.NOSE]: {
+    neutralColor: "#444444",
+    styles: Object.values(NoseStyle),
+    defaultStyle: Object.values(NoseStyle)[0],
+    render: Nose,
+  },
   [AvatarPart.EAR]: {
     neutralColor: "#444444",
     styles: Object.values(EarStyle),
@@ -189,7 +200,7 @@ const tabs: { name: string; value: string }[] = [
   { name: "Eyes", value: "eyes" },
   { name: "Brows", value: "brows" },
   { name: "Ear", value: "ear" },
-  // { name: "Nose", value: "nose" },
+  { name: "Nose", value: "nose" },
   { name: "Mouth", value: "mouth" },
   // { name: "Facial", value: "facial" },
   // { name: "Accessories", value: "accessories" },
@@ -342,6 +353,10 @@ function App() {
                   },
                   ear: {
                     style: config[AvatarPart.EAR]!.style,
+                    faceColor: config[AvatarPart.FACE]!.color,
+                  },
+                  nose: {
+                    style: config[AvatarPart.NOSE]!.style,
                     faceColor: config[AvatarPart.FACE]!.color,
                   },
                 }}
