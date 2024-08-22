@@ -11,6 +11,8 @@ function FaceShadow({
   },
   className,
 }: SubPartProps<FaceStyle>) {
+  color = color ?? "#000";
+
   switch (style) {
     case FaceStyle.FIRST:
       return (
