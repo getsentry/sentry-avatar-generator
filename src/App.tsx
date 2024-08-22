@@ -188,19 +188,29 @@ const updateQueryString = (config: AvatarConfig) => {
   const jsonString = JSON.stringify(config);
   const encodedConfig = btoa(jsonString);
 
+  // set config query string
   const url = new URL(window.location.href);
   url.searchParams.set("c", encodedConfig);
   history.pushState(null, "", url);
 };
 
 const decodeQueryString = () => {
-  const params = new URLSearchParams(window.location.search);
-  const config = params.get("c");
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const config = params.get("c");
 
-  if (config) {
-    const decodedConfig = JSON.parse(atob(config));
+    if (config) {
+      const decodedConfig = JSON.parse(atob(config));
 
-    return decodedConfig;
+      return decodedConfig;
+    }
+  } catch {
+    toast.error("Unable to load shared avatar.");
+
+    // clear config query string
+    const url = new URL(window.location.href);
+    url.searchParams.delete("c");
+    history.pushState(null, "", url);
   }
 
   return null;
