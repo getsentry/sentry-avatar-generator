@@ -5,6 +5,7 @@ import {
   EarStyle,
   PartProps,
 } from "@/components/avatar/sentry-avatar.types";
+import { cn } from "@/lib/utils";
 
 export interface EarConfig extends PartConfig<EarStyle> {
   style: EarStyle;
@@ -20,8 +21,14 @@ export interface EarProps extends PartProps<EarStyle> {
 function Ear(props: EarProps) {
   return (
     <>
-      <EarBase partProps={props} className="absolute top-0 z-20" />
-      <EarTone partProps={props} className="absolute top-0 z-20" />
+      <EarBase
+        partProps={props}
+        className={cn(props.className, "absolute top-0")}
+      />
+      <EarTone
+        partProps={props}
+        className={cn(props.className, "absolute top-0")}
+      />
     </>
   );
 }

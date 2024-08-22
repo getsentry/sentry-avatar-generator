@@ -5,6 +5,7 @@ import {
   PartConfig,
   PartProps,
 } from "@/components/avatar/sentry-avatar.types";
+import { cn } from "@/lib/utils";
 
 export interface HairConfig extends PartConfig<HairStyle> {
   style: HairStyle;
@@ -20,8 +21,14 @@ export interface HairProps extends PartProps<HairStyle> {
 function Hair(props: HairProps) {
   return (
     <>
-      <HairBack partProps={props} className="absolute top-0 z-0" />
-      <HairFront partProps={props} className="absolute top-0 z-20" />
+      <HairBack
+        partProps={props}
+        className={cn(props.className, "absolute top-0")}
+      />
+      <HairFront
+        partProps={props}
+        className={cn(props.className, "absolute top-0 z-[100]")}
+      />
     </>
   );
 }
