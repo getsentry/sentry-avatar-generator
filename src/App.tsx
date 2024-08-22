@@ -32,6 +32,7 @@ import {
 } from "@radix-ui/react-icons";
 import Eyes, { EyesProps } from "./components/avatar/eyes/eyes";
 import {
+  AccessoriesStyle,
   BrowsStyle,
   EarStyle,
   EyesStyle,
@@ -50,6 +51,9 @@ import Nose, { NoseProps } from "@/components/avatar/nose/nose";
 import FacialHair, {
   FacialHairProps,
 } from "@/components/avatar/facial-hair/facial-hair";
+import Accessories, {
+  AccessoriesProps,
+} from "@/components/avatar/accessories/accessories";
 
 /**
  * Available download aspect ratio options.
@@ -68,6 +72,7 @@ enum AvatarPart {
   HAIR = "hair",
   NOSE = "nose",
   FACIAL_HAIR = "facial-hair",
+  ACCESSORIES = "accessories",
 }
 
 /**
@@ -82,6 +87,7 @@ type AvatarPartStyles = {
   [AvatarPart.HAIR]: HairStyle;
   [AvatarPart.NOSE]: NoseStyle;
   [AvatarPart.FACIAL_HAIR]: FacialHairStyle;
+  [AvatarPart.ACCESSORIES]: AccessoriesStyle;
 };
 
 /**
@@ -96,6 +102,7 @@ type AvatarPartProps = {
   [AvatarPart.HAIR]: HairProps;
   [AvatarPart.NOSE]: NoseProps;
   [AvatarPart.FACIAL_HAIR]: FacialHairProps;
+  [AvatarPart.ACCESSORIES]: AccessoriesProps;
 };
 
 /**
@@ -205,6 +212,12 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(FacialHairStyle)[0],
     render: FacialHair,
   },
+  [AvatarPart.ACCESSORIES]: {
+    neutralColor: "#444444",
+    styles: Object.values(AccessoriesStyle),
+    defaultStyle: Object.values(AccessoriesStyle)[0],
+    render: Accessories,
+  },
 };
 
 const tabs: { name: string; value: string }[] = [
@@ -216,7 +229,7 @@ const tabs: { name: string; value: string }[] = [
   { name: "Nose", value: "nose" },
   { name: "Mouth", value: "mouth" },
   { name: "Facial Hair", value: "facial-hair" },
-  // { name: "Accessories", value: "accessories" },
+  { name: "Accessories", value: "accessories" },
 ];
 
 /**
@@ -375,6 +388,10 @@ function App() {
                   facialHair: {
                     style: config[AvatarPart.FACIAL_HAIR]!.style,
                     hairColor: config[AvatarPart.HAIR]!.color,
+                  },
+                  accessories: {
+                    style: config[AvatarPart.ACCESSORIES]!.style,
+                    faceColor: config[AvatarPart.FACE]!.color,
                   },
                 }}
               />

@@ -1,0 +1,22 @@
+.cls-1 {
+  opacity: 0.15;
+}
+
+.cls-1,
+.cls-2,
+.cls-3 {
+  stroke-width: 0px;
+}
+
+.cls-1,
+.cls-3 {
+  fill: #fff;
+}
+
+.cls-2 {
+  fill: #000;
+}
+
+.cls-3 {
+  opacity: 0.25;
+}

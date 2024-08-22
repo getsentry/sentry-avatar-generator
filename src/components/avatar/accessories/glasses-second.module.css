@@ -1,0 +1,27 @@
+.cls-1 {
+  opacity: 0.15;
+}
+
+.cls-1,
+.cls-2,
+.cls-3 {
+  stroke-width: 0px;
+}
+
+.cls-1,
+.cls-3 {
+  fill: #fff;
+}
+
+.cls-2 {
+  fill: #000;
+}
+
+.cls-4 {
+  isolation: isolate;
+}
+
+.cls-3 {
+  mix-blend-mode: screen;
+  opacity: 0.2;
+}
