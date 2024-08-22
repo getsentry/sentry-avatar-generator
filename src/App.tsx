@@ -36,6 +36,7 @@ import {
   EarStyle,
   EyesStyle,
   FaceStyle,
+  FacialHairStyle,
   HairStyle,
   MouthStyle,
   NoseStyle,
@@ -46,6 +47,9 @@ import { toast, Toaster } from "sonner";
 import Ear, { EarProps } from "./components/avatar/ear/ear";
 import Hair, { HairProps } from "./components/avatar/hair/hair";
 import Nose, { NoseProps } from "@/components/avatar/nose/nose";
+import FacialHair, {
+  FacialHairProps,
+} from "@/components/avatar/facial-hair/facial-hair";
 
 /**
  * Available download aspect ratio options.
@@ -63,6 +67,7 @@ enum AvatarPart {
   EAR = "ear",
   HAIR = "hair",
   NOSE = "nose",
+  FACIAL_HAIR = "facial-hair",
 }
 
 /**
@@ -76,6 +81,7 @@ type AvatarPartStyles = {
   [AvatarPart.EAR]: EarStyle;
   [AvatarPart.HAIR]: HairStyle;
   [AvatarPart.NOSE]: NoseStyle;
+  [AvatarPart.FACIAL_HAIR]: FacialHairStyle;
 };
 
 /**
@@ -89,6 +95,7 @@ type AvatarPartProps = {
   [AvatarPart.EAR]: EarProps;
   [AvatarPart.HAIR]: HairProps;
   [AvatarPart.NOSE]: NoseProps;
+  [AvatarPart.FACIAL_HAIR]: FacialHairProps;
 };
 
 /**
@@ -192,6 +199,12 @@ const configOptions: AvatarGeneratorConfigOptions = {
     defaultStyle: Object.values(HairStyle)[0],
     render: Hair,
   },
+  [AvatarPart.FACIAL_HAIR]: {
+    neutralColor: "#444444",
+    styles: Object.values(FacialHairStyle),
+    defaultStyle: Object.values(FacialHairStyle)[0],
+    render: FacialHair,
+  },
 };
 
 const tabs: { name: string; value: string }[] = [
@@ -202,7 +215,7 @@ const tabs: { name: string; value: string }[] = [
   { name: "Ear", value: "ear" },
   { name: "Nose", value: "nose" },
   { name: "Mouth", value: "mouth" },
-  // { name: "Facial", value: "facial" },
+  { name: "Facial Hair", value: "facial-hair" },
   // { name: "Accessories", value: "accessories" },
 ];
 
@@ -358,6 +371,10 @@ function App() {
                   nose: {
                     style: config[AvatarPart.NOSE]!.style,
                     faceColor: config[AvatarPart.FACE]!.color,
+                  },
+                  facialHair: {
+                    style: config[AvatarPart.FACIAL_HAIR]!.style,
+                    hairColor: config[AvatarPart.HAIR]!.color,
                   },
                 }}
               />

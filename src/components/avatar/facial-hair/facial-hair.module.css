@@ -1,0 +1,22 @@
+.cls-1,
+.cls-2,
+.cls-3 {
+  stroke-width: 0px;
+}
+
+.cls-2 {
+  mix-blend-mode: screen;
+}
+
+.cls-2,
+.cls-3 {
+  opacity: 0.64;
+}
+
+.cls-4 {
+  isolation: isolate;
+}
+
+.cls-3 {
+  mix-blend-mode: multiply;
+}

@@ -5,6 +5,9 @@ import Eyes, { EyesConfig } from "./eyes/eyes";
 import Face, { FaceConfig } from "./face/face";
 import Hair, { HairConfig } from "./hair/hair";
 import Mouth, { MouthConfig } from "./mouth/mouth";
+import FacialHair, {
+  FacialHairConfig,
+} from "@/components/avatar/facial-hair/facial-hair";
 
 export interface SentryAvatarConfig {
   face: FaceConfig;
@@ -14,6 +17,7 @@ export interface SentryAvatarConfig {
   ear: EarConfig;
   hair: HairConfig;
   nose: NoseConfig;
+  facialHair: FacialHairConfig;
 }
 
 // Layers:
@@ -54,6 +58,12 @@ function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
         height={512}
         config={config.mouth}
         className="absolute top-0 z-40"
+      />
+      <FacialHair
+        width={512}
+        height={512}
+        config={config.facialHair}
+        className="absolute top-0 z-50"
       />
       <Eyes
         width={512}
