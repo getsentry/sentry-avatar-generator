@@ -145,8 +145,6 @@ const configOptions: AvatarGeneratorConfigOptions = {
     render: Eyes,
   },
   [AvatarPart.BROWS]: {
-    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#0E0705"],
-    defaultColor: "#0E0705",
     neutralColor: "#444444",
     styles: Object.values(BrowsStyle),
     defaultStyle: Object.values(BrowsStyle)[0],
@@ -323,7 +321,6 @@ function App() {
                     style: config[AvatarPart.EYES]!.style,
                   },
                   brows: {
-                    color: config[AvatarPart.BROWS]!.color,
                     style: config[AvatarPart.BROWS]!.style,
                   },
                   mouth: {

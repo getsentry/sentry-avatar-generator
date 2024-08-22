@@ -66,6 +66,7 @@ function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
         width={512}
         height={512}
         config={config.brows}
+        hairColor={config.hair.color}
         className="absolute top-0 z-[80]"
       />
     </div>
