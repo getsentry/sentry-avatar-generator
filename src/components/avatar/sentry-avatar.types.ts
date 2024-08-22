@@ -73,25 +73,29 @@ export enum AccessoriesStyle {
   GLASSES_SECOND = "glasses-second",
 }
 
-export type PartConfigWithColor<PartStyle> = {
+export type PartConfigRequiredStyle<PartStyle> = {
   style: PartStyle;
+};
+
+export type PartConfigOptionalStyle<PartStyle> = {
+  style: PartStyle | null;
+};
+
+export type PartConfigColor = {
   color: string;
 };
 
-export type PartConfigWithFaceColor<PartStyle> = {
-  style: PartStyle;
+export type PartConfigFaceColor = {
   faceColor: string;
 };
 
-export type PartConfigWithHairColor<PartStyle> = {
-  style: PartStyle;
+export type PartConfigHairColor = {
   hairColor: string;
 };
 
 export type PartConfig<PartStyle> =
-  | PartConfigWithColor<PartStyle>
-  | PartConfigWithFaceColor<PartStyle>
-  | PartConfigWithHairColor<PartStyle>;
+  | PartConfigRequiredStyle<PartStyle>
+  | PartConfigOptionalStyle<PartStyle>;
 
 export type PartProps<P extends PartConfig<PartStyle>, PartStyle> = {
   width?: number;

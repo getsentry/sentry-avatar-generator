@@ -3,16 +3,18 @@ import classes from "./eyes.module.css";
 import BaseSvg from "@/components/avatar/base-svg";
 import {
   EyesStyle,
-  PartConfigWithColor,
-  PartConfigWithFaceColor,
+  PartConfigColor,
+  PartConfigFaceColor,
+  PartConfigRequiredStyle,
   PartProps,
 } from "@/components/avatar/sentry-avatar.types";
 
 const EYES_DARKENED_PERCENTAGE = 30;
 
 export interface EyesConfig
-  extends PartConfigWithFaceColor<EyesStyle>,
-    PartConfigWithColor<EyesStyle> {}
+  extends PartConfigRequiredStyle<EyesStyle>,
+    PartConfigColor,
+    PartConfigFaceColor {}
 export type EyesProps = PartProps<EyesConfig, EyesStyle>;
 
 function Eyes({

@@ -2,12 +2,15 @@ import HairBack from "@/components/avatar/hair/hair-back";
 import HairFront from "@/components/avatar/hair/hair-front";
 import {
   HairStyle,
-  PartConfigWithColor,
+  PartConfigColor,
+  PartConfigOptionalStyle,
   PartProps,
 } from "@/components/avatar/sentry-avatar.types";
 import { cn } from "@/lib/utils";
 
-export type HairConfig = PartConfigWithColor<HairStyle>;
+export interface HairConfig
+  extends PartConfigOptionalStyle<HairStyle>,
+    PartConfigColor {}
 export type HairProps = PartProps<HairConfig, HairStyle>;
 
 function Hair(props: HairProps) {

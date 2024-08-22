@@ -1,12 +1,15 @@
 import GlassesFirst from "@/components/avatar/accessories/glasses-first";
 import GlassesSecond from "@/components/avatar/accessories/glasses-second";
 import {
-  PartConfigWithFaceColor,
   AccessoriesStyle,
+  PartConfigColor,
+  PartConfigOptionalStyle,
   PartProps,
 } from "@/components/avatar/sentry-avatar.types";
 
-export type AccessoriesConfig = PartConfigWithFaceColor<AccessoriesStyle>;
+export interface AccessoriesConfig
+  extends PartConfigOptionalStyle<AccessoriesStyle>,
+    PartConfigColor {}
 export type AccessoriesProps = PartProps<AccessoriesConfig, AccessoriesStyle>;
 
 function Accessories({ config, className }: AccessoriesProps) {

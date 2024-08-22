@@ -84,10 +84,10 @@ type AvatarPartStyles = {
   [AvatarPart.BROWS]: BrowsStyle;
   [AvatarPart.MOUTH]: MouthStyle;
   [AvatarPart.EAR]: EarStyle;
-  [AvatarPart.HAIR]: HairStyle;
+  [AvatarPart.HAIR]: HairStyle | null;
   [AvatarPart.NOSE]: NoseStyle;
-  [AvatarPart.FACIAL_HAIR]: FacialHairStyle;
-  [AvatarPart.ACCESSORIES]: AccessoriesStyle;
+  [AvatarPart.FACIAL_HAIR]: FacialHairStyle | null;
+  [AvatarPart.ACCESSORIES]: AccessoriesStyle | null;
 };
 
 /**
@@ -141,6 +141,10 @@ type AvatarGeneratorConfigOptions = {
      */
     defaultStyle: AvatarPartStyles[key];
     /**
+     * Allows the user to not have this part as an option.
+     */
+    allowNull: boolean;
+    /**
      * React component used to render this part.
      */
     render: RenderFunction<AvatarPartProps[key]>[key];
@@ -164,6 +168,7 @@ const configOptions: AvatarGeneratorConfigOptions = {
     neutralColor: "#8E8E8E",
     styles: Object.values(FaceStyle),
     defaultStyle: Object.values(FaceStyle)[0],
+    allowNull: false,
     render: Face,
   },
   [AvatarPart.EYES]: {
@@ -172,30 +177,35 @@ const configOptions: AvatarGeneratorConfigOptions = {
     neutralColor: "#444444",
     styles: Object.values(EyesStyle),
     defaultStyle: Object.values(EyesStyle)[0],
+    allowNull: false,
     render: Eyes,
   },
   [AvatarPart.BROWS]: {
     neutralColor: "#444444",
     styles: Object.values(BrowsStyle),
     defaultStyle: Object.values(BrowsStyle)[0],
+    allowNull: false,
     render: Brows,
   },
   [AvatarPart.MOUTH]: {
     neutralColor: "#444444",
     styles: Object.values(MouthStyle),
     defaultStyle: Object.values(MouthStyle)[0],
+    allowNull: false,
     render: Mouth,
   },
   [AvatarPart.NOSE]: {
     neutralColor: "#444444",
     styles: Object.values(NoseStyle),
     defaultStyle: Object.values(NoseStyle)[0],
+    allowNull: false,
     render: Nose,
   },
   [AvatarPart.EAR]: {
     neutralColor: "#444444",
     styles: Object.values(EarStyle),
     defaultStyle: Object.values(EarStyle)[0],
+    allowNull: false,
     render: Ear,
   },
   [AvatarPart.HAIR]: {
@@ -204,18 +214,21 @@ const configOptions: AvatarGeneratorConfigOptions = {
     neutralColor: "#444444",
     styles: Object.values(HairStyle),
     defaultStyle: Object.values(HairStyle)[0],
+    allowNull: true,
     render: Hair,
   },
   [AvatarPart.FACIAL_HAIR]: {
     neutralColor: "#444444",
     styles: Object.values(FacialHairStyle),
-    defaultStyle: Object.values(FacialHairStyle)[0],
+    defaultStyle: null,
+    allowNull: true,
     render: FacialHair,
   },
   [AvatarPart.ACCESSORIES]: {
     neutralColor: "#444444",
     styles: Object.values(AccessoriesStyle),
-    defaultStyle: Object.values(AccessoriesStyle)[0],
+    defaultStyle: null,
+    allowNull: true,
     render: Accessories,
   },
 };
@@ -357,41 +370,41 @@ function App() {
               <SentryAvatar
                 config={{
                   face: {
-                    color: config[AvatarPart.FACE]!.color,
-                    style: config[AvatarPart.FACE]!.style,
+                    color: config[AvatarPart.FACE].color,
+                    style: config[AvatarPart.FACE].style,
                   },
                   hair: {
-                    color: config[AvatarPart.HAIR]!.color,
-                    style: config[AvatarPart.HAIR]!.style,
+                    color: config[AvatarPart.HAIR].color,
+                    style: config[AvatarPart.HAIR].style,
                   },
                   eyes: {
-                    color: config[AvatarPart.EYES]!.color,
-                    style: config[AvatarPart.EYES]!.style,
-                    faceColor: config[AvatarPart.FACE]!.color,
+                    color: config[AvatarPart.EYES].color,
+                    style: config[AvatarPart.EYES].style,
+                    faceColor: config[AvatarPart.FACE].color,
                   },
                   brows: {
-                    style: config[AvatarPart.BROWS]!.style,
-                    hairColor: config[AvatarPart.HAIR]!.color,
+                    style: config[AvatarPart.BROWS].style,
+                    hairColor: config[AvatarPart.HAIR].color,
                   },
                   mouth: {
-                    style: config[AvatarPart.MOUTH]!.style,
-                    faceColor: config[AvatarPart.FACE]!.color,
+                    style: config[AvatarPart.MOUTH].style,
+                    faceColor: config[AvatarPart.FACE].color,
                   },
                   ear: {
-                    style: config[AvatarPart.EAR]!.style,
-                    faceColor: config[AvatarPart.FACE]!.color,
+                    style: config[AvatarPart.EAR].style,
+                    faceColor: config[AvatarPart.FACE].color,
                   },
                   nose: {
-                    style: config[AvatarPart.NOSE]!.style,
+                    style: config[AvatarPart.NOSE].style,
                     faceColor: config[AvatarPart.FACE]!.color,
                   },
                   facialHair: {
-                    style: config[AvatarPart.FACIAL_HAIR]!.style,
-                    hairColor: config[AvatarPart.HAIR]!.color,
+                    style: config[AvatarPart.FACIAL_HAIR].style,
+                    hairColor: config[AvatarPart.HAIR].color,
                   },
                   accessories: {
-                    style: config[AvatarPart.ACCESSORIES]!.style,
-                    faceColor: config[AvatarPart.FACE]!.color,
+                    style: config[AvatarPart.ACCESSORIES].style,
+                    color: config[AvatarPart.ACCESSORIES].color,
                   },
                 }}
               />
@@ -430,6 +443,7 @@ function App() {
                       values={partConfig.styles}
                       currentValue={currentPartConfig.style}
                       setValue={(style) => setPartStyle(part, style)}
+                      allowNullValue={partConfig.allowNull}
                       render={(style) => {
                         const Component =
                           // eslint-disable-next-line @typescript-eslint/no-explicit-any

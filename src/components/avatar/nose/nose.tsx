@@ -3,13 +3,15 @@ import NoseHighlight from "@/components/avatar/nose/nose-highlight";
 import NoseShadow from "@/components/avatar/nose/nose-shadow";
 import {
   NoseStyle,
+  PartConfigFaceColor,
+  PartConfigRequiredStyle,
   PartProps,
-  PartConfigWithFaceColor,
 } from "@/components/avatar/sentry-avatar.types";
-
 import { cn } from "@/lib/utils";
 
-export type NoseConfig = PartConfigWithFaceColor<NoseStyle>;
+export interface NoseConfig
+  extends PartConfigRequiredStyle<NoseStyle>,
+    PartConfigFaceColor {}
 export type NoseProps = PartProps<NoseConfig, NoseStyle>;
 
 function Nose(props: NoseProps) {

@@ -1,15 +1,18 @@
 import { darkenHexColor } from "@/lib/utils";
-import {
-  MouthStyle,
-  PartConfigWithFaceColor,
-  PartProps,
-} from "../sentry-avatar.types";
 import classes from "./mouth.module.css";
 import BaseSvg from "@/components/avatar/base-svg";
+import {
+  PartConfigRequiredStyle,
+  MouthStyle,
+  PartProps,
+  PartConfigFaceColor,
+} from "@/components/avatar/sentry-avatar.types";
 
 const MOUTH_DARKENED_PERCENTAGE = 30;
 
-export type MouthConfig = PartConfigWithFaceColor<MouthStyle>;
+export interface MouthConfig
+  extends PartConfigRequiredStyle<MouthStyle>,
+    PartConfigFaceColor {}
 export type MouthProps = PartProps<MouthConfig, MouthStyle>;
 
 function Mouth({

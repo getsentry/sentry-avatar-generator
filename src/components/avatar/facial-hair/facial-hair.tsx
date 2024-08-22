@@ -1,15 +1,18 @@
 import { cn, darkenHexColor } from "@/lib/utils";
-import {
-  FacialHairStyle,
-  PartConfigWithHairColor,
-  PartProps,
-} from "../sentry-avatar.types";
 import classes from "./facial-hair.module.css";
 import BaseSvg from "@/components/avatar/base-svg";
+import {
+  FacialHairStyle,
+  PartProps,
+  PartConfigOptionalStyle,
+  PartConfigHairColor,
+} from "@/components/avatar/sentry-avatar.types";
 
 const FACIAL_HAIR_DARKENED_PERCENTAGE = 10;
 
-export type FacialHairConfig = PartConfigWithHairColor<FacialHairStyle>;
+export interface FacialHairConfig
+  extends PartConfigOptionalStyle<FacialHairStyle>,
+    PartConfigHairColor {}
 export type FacialHairProps = PartProps<FacialHairConfig, FacialHairStyle>;
 
 function Mustache({

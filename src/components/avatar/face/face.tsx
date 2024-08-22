@@ -1,14 +1,17 @@
-import {
-  FaceStyle,
-  PartConfigWithColor,
-  PartProps,
-} from "../sentry-avatar.types";
 import FaceHighlight from "./face-highlight";
 import FaceBase from "./face-base";
 import FaceShadow from "./face-shadow";
 import { cn } from "@/lib/utils";
+import {
+  PartConfigRequiredStyle,
+  FaceStyle,
+  PartProps,
+  PartConfigColor,
+} from "@/components/avatar/sentry-avatar.types";
 
-export type FaceConfig = PartConfigWithColor<FaceStyle>;
+export interface FaceConfig
+  extends PartConfigRequiredStyle<FaceStyle>,
+    PartConfigColor {}
 export type FaceProps = PartProps<FaceConfig, FaceStyle>;
 
 function Face(props: FaceProps) {
