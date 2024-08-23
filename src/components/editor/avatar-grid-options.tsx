@@ -22,10 +22,13 @@ function AvatarGridOptions<T>({
         return (
           <button onClick={() => setValue(value)} key={i}>
             <div
-              className={classNames("w-full aspect-square relative", {
-                "border-gray-400 border-4": !isSelected,
-                "border-purple-700 border-4": isSelected,
-              })}
+              className={classNames(
+                "w-full aspect-square relative overflow-hidden",
+                {
+                  "border-gray-400 border-4": !isSelected,
+                  "border-purple-700 border-4": isSelected,
+                }
+              )}
             >
               {render(value)}
             </div>

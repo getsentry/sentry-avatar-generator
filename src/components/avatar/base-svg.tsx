@@ -15,7 +15,7 @@ function BaseSvg({
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 1920 1920"
+      viewBox="0 0 1920 2420"
       className={className}
     >
       {children}

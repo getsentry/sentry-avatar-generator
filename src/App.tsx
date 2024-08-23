@@ -1,5 +1,7 @@
 import Face, { FaceProps } from "./components/avatar/face/face";
-import SentryAvatar from "./components/avatar/sentry-avatar";
+import SentryAvatar, {
+  SentryAvatarConfig,
+} from "./components/avatar/sentry-avatar";
 import AvatarPreview from "./components/editor/avatar-preview";
 import { ThemeProvider } from "@/components/theme-provider";
 import {
@@ -17,18 +19,12 @@ import { Button } from "./components/ui/button";
 import { saveAs } from "file-saver";
 import AvatarColorOptions from "./components/editor/avatar-color-options";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  ChevronDownIcon,
   DownloadIcon,
   LoopIcon,
   Share2Icon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ReloadIcon,
 } from "@radix-ui/react-icons";
 import Eyes, { EyesProps } from "./components/avatar/eyes/eyes";
 import {
@@ -54,6 +50,14 @@ import FacialHair, {
 import Accessories, {
   AccessoriesProps,
 } from "@/components/avatar/accessories/accessories";
+import AvatarDownloadCircleFormat from "@/components/editor/avatar-download-formats/avatar-download-circle-format";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 /**
  * Available download aspect ratio options.
@@ -347,12 +351,41 @@ function App() {
     updateQueryString(newConfig);
   };
 
+  const [isExportDialogOpen, setIsExportDialogOpen] = useState<boolean>(false);
+  const [showExport, setShowExport] = useState<boolean>(false);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onDownload = (_aspectRatio: AspectRatioOption) => {
+  const onDownload = async (_aspectRatio: AspectRatioOption) => {
+    // first open dialog
+    setIsExportDialogOpen(true);
+
+    // then we show the exportable node
+    setShowExport(true);
+
+    // wait a few seconds
+    await new Promise((f) => setTimeout(f, 500));
+
+    // generate an image right away
     domtoimage
-      .toBlob(document.getElementById("avatar-preview")!)
-      .then(function (blob) {
-        saveAs(blob, "sentry-avatar.png");
+      .toPng(document.getElementById("circle-export")!)
+      .then(function (dataUrl) {
+        const img = new Image();
+        img.src = dataUrl;
+
+        // show the image as a result
+        const previewDiv = document.getElementById("export-image-preview");
+        previewDiv!.innerHTML = "";
+        previewDiv?.appendChild(img);
+
+        // generate an image blob and download for the user
+        domtoimage
+          .toBlob(document.getElementById("circle-export")!)
+          .then(function (blob) {
+            saveAs(blob, "sentry-avatar.png");
+
+            // hide the export
+            setShowExport(false);
+          });
       });
   };
 
@@ -361,53 +394,53 @@ function App() {
     toast.success("Avatar URL copied!");
   };
 
+  const avatarConfig: SentryAvatarConfig = {
+    face: {
+      color: config[AvatarPart.FACE].color,
+      style: config[AvatarPart.FACE].style,
+    },
+    hair: {
+      color: config[AvatarPart.HAIR].color,
+      style: config[AvatarPart.HAIR].style,
+    },
+    eyes: {
+      color: config[AvatarPart.EYES].color,
+      style: config[AvatarPart.EYES].style,
+      faceColor: config[AvatarPart.FACE].color,
+    },
+    brows: {
+      style: config[AvatarPart.BROWS].style,
+      hairColor: config[AvatarPart.HAIR].color,
+    },
+    mouth: {
+      style: config[AvatarPart.MOUTH].style,
+      faceColor: config[AvatarPart.FACE].color,
+    },
+    ear: {
+      style: config[AvatarPart.EAR].style,
+      faceColor: config[AvatarPart.FACE].color,
+    },
+    nose: {
+      style: config[AvatarPart.NOSE].style,
+      faceColor: config[AvatarPart.FACE]!.color,
+    },
+    facialHair: {
+      style: config[AvatarPart.FACIAL_HAIR].style,
+      hairColor: config[AvatarPart.HAIR].color,
+    },
+    accessories: {
+      style: config[AvatarPart.ACCESSORIES].style,
+      color: config[AvatarPart.ACCESSORIES].color,
+    },
+  };
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="container max-w-screen-xl my-10">
         <div className="grid grid-cols-1 sm:grid-rows-2 sm:grid-cols-5 gap-3">
           <div className="order-0 sm:col-span-2 bg-[#ED5781] rounded-lg align-middle justify-center flex">
             <AvatarPreview id="avatar-preview">
-              <SentryAvatar
-                config={{
-                  face: {
-                    color: config[AvatarPart.FACE].color,
-                    style: config[AvatarPart.FACE].style,
-                  },
-                  hair: {
-                    color: config[AvatarPart.HAIR].color,
-                    style: config[AvatarPart.HAIR].style,
-                  },
-                  eyes: {
-                    color: config[AvatarPart.EYES].color,
-                    style: config[AvatarPart.EYES].style,
-                    faceColor: config[AvatarPart.FACE].color,
-                  },
-                  brows: {
-                    style: config[AvatarPart.BROWS].style,
-                    hairColor: config[AvatarPart.HAIR].color,
-                  },
-                  mouth: {
-                    style: config[AvatarPart.MOUTH].style,
-                    faceColor: config[AvatarPart.FACE].color,
-                  },
-                  ear: {
-                    style: config[AvatarPart.EAR].style,
-                    faceColor: config[AvatarPart.FACE].color,
-                  },
-                  nose: {
-                    style: config[AvatarPart.NOSE].style,
-                    faceColor: config[AvatarPart.FACE]!.color,
-                  },
-                  facialHair: {
-                    style: config[AvatarPart.FACIAL_HAIR].style,
-                    hairColor: config[AvatarPart.HAIR].color,
-                  },
-                  accessories: {
-                    style: config[AvatarPart.ACCESSORIES].style,
-                    color: config[AvatarPart.ACCESSORIES].color,
-                  },
-                }}
-              />
+              <SentryAvatar config={avatarConfig} />
             </AvatarPreview>
           </div>
 
@@ -509,6 +542,15 @@ function App() {
               <LoopIcon className="ml-2 h-5 w-5 min-w-5 hidden @xs:inline-block" />
             </Button>
 
+            <Button
+              className="col-span-2 text-xs @xs:text-sm @sm:text-lg"
+              variant="sentry"
+              onClick={() => onDownload("9:16")}
+            >
+              Download
+              <DownloadIcon className="ml-1 h-5 w-5 min-w-5 hidden @xs:inline-block" />
+            </Button>
+            {/* 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -548,7 +590,7 @@ function App() {
                   </Button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
 
             <Button onClick={onShare} variant="sentry">
               <Share2Icon className="h-6 w-6 min-w-5" />
@@ -556,7 +598,31 @@ function App() {
           </div>
         </div>
       </div>
+
+      <Dialog open={isExportDialogOpen} onOpenChange={setIsExportDialogOpen}>
+        <DialogContent className="z-[300]">
+          <DialogHeader>
+            <DialogTitle>Download Avatar</DialogTitle>
+            <DialogDescription className="flex flex-col justify-center items-center">
+              {showExport && (
+                <ReloadIcon className="w-20 h-20 animate-spin text-white m-20" />
+              )}
+              <div id="export-image-preview" />
+              {!showExport && (
+                <Button
+                  variant="sentry"
+                  onClick={() => setIsExportDialogOpen(false)}
+                  className="px-10 mt-5"
+                >
+                  Close
+                </Button>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
       <Toaster />
+      {showExport && <AvatarDownloadCircleFormat avatarConfig={avatarConfig} />}
     </ThemeProvider>
   );
 }

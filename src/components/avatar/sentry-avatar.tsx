@@ -36,60 +36,68 @@ export interface SentryAvatarConfig {
 // face: z-20
 // ears: z-10
 // back hair: z-0
-function SentryAvatar({ config }: { config: SentryAvatarConfig }) {
+function SentryAvatar({
+  width,
+  height,
+  config,
+}: {
+  config: SentryAvatarConfig;
+  width?: number;
+  height?: number;
+}) {
   return (
-    <div className="relative w-[512px] h-[512px]">
+    <div className="relative">
       <Hair
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.hair}
         className="absolute top-0 z-0"
       />
       <Ear
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.ear}
         className="absolute top-0 z-10"
       />
       <Face
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.face}
         className="absolute top-0 z-20"
       />
-      <Mouth
-        width={512}
-        height={512}
-        config={config.mouth}
+      <FacialHair
+        width={width}
+        height={height}
+        config={config.facialHair}
         className="absolute top-0 z-40"
       />
-      <FacialHair
-        width={512}
-        height={512}
-        config={config.facialHair}
+      <Mouth
+        width={width}
+        height={height}
+        config={config.mouth}
         className="absolute top-0 z-50"
       />
       <Eyes
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.eyes}
         className="absolute top-0 z-[60]"
       />
       <Nose
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.nose}
         className="absolute top-0 z-[60]"
       />
       <Brows
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.brows}
         className="absolute top-0 z-[80]"
       />
       <Accessories
-        width={512}
-        height={512}
+        width={width}
+        height={height}
         config={config.accessories}
         className="absolute top-0 z-[100]"
       />

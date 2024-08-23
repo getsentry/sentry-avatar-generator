@@ -27,7 +27,7 @@ function Mustache({
   hairColor: string;
 }) {
   return (
-    <BaseSvg width={width} height={height} className={className}>
+    <BaseSvg width={width} height={height} className={cn(className, "z-[55]")}>
       <g className={classes.cls4}>
         <g id="Layer_12" data-name="Layer 12">
           <polygon
