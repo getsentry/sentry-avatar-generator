@@ -1,4 +1,3 @@
-import Face, { FaceProps } from "./components/avatar/face/face";
 import SentryAvatar, {
   SentryAvatarConfig,
 } from "./components/avatar/sentry-avatar";
@@ -26,30 +25,7 @@ import {
   ChevronRightIcon,
   ReloadIcon,
 } from "@radix-ui/react-icons";
-import Eyes, { EyesProps } from "./components/avatar/eyes/eyes";
-import {
-  AccessoriesStyle,
-  BrowsStyle,
-  EarStyle,
-  EyesStyle,
-  FaceStyle,
-  FacialHairStyle,
-  HairStyle,
-  MouthStyle,
-  NoseStyle,
-} from "./components/avatar/sentry-avatar.types";
-import Brows, { BrowsProps } from "./components/avatar/brows/brows";
-import Mouth, { MouthProps } from "./components/avatar/mouth/mouth";
 import { toast, Toaster } from "sonner";
-import Ear, { EarProps } from "./components/avatar/ear/ear";
-import Hair, { HairProps } from "./components/avatar/hair/hair";
-import Nose, { NoseProps } from "@/components/avatar/nose/nose";
-import FacialHair, {
-  FacialHairProps,
-} from "@/components/avatar/facial-hair/facial-hair";
-import Accessories, {
-  AccessoriesProps,
-} from "@/components/avatar/accessories/accessories";
 import AvatarDownloadCircleFormat from "@/components/editor/avatar-download-formats/avatar-download-circle-format";
 import {
   Dialog,
@@ -58,184 +34,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
-/**
- * Available download aspect ratio options.
- */
-type AspectRatioOption = "9:16" | "1:1" | "16:9";
-
-/**
- * Available avatar parts.
- */
-enum AvatarPart {
-  FACE = "face",
-  EYES = "eyes",
-  BROWS = "brows",
-  MOUTH = "mouth",
-  EAR = "ear",
-  HAIR = "hair",
-  NOSE = "nose",
-  FACIAL_HAIR = "facial-hair",
-  ACCESSORIES = "accessories",
-}
-
-/**
- * Mapping of available styles for each avatar part.
- */
-type AvatarPartStyles = {
-  [AvatarPart.FACE]: FaceStyle;
-  [AvatarPart.EYES]: EyesStyle;
-  [AvatarPart.BROWS]: BrowsStyle;
-  [AvatarPart.MOUTH]: MouthStyle;
-  [AvatarPart.EAR]: EarStyle;
-  [AvatarPart.HAIR]: HairStyle | null;
-  [AvatarPart.NOSE]: NoseStyle;
-  [AvatarPart.FACIAL_HAIR]: FacialHairStyle | null;
-  [AvatarPart.ACCESSORIES]: AccessoriesStyle | null;
-};
-
-/**
- * Mapping of props needed for each avatar part.
- */
-type AvatarPartProps = {
-  [AvatarPart.FACE]: FaceProps;
-  [AvatarPart.EYES]: EyesProps;
-  [AvatarPart.BROWS]: BrowsProps;
-  [AvatarPart.MOUTH]: MouthProps;
-  [AvatarPart.EAR]: EarProps;
-  [AvatarPart.HAIR]: HairProps;
-  [AvatarPart.NOSE]: NoseProps;
-  [AvatarPart.FACIAL_HAIR]: FacialHairProps;
-  [AvatarPart.ACCESSORIES]: AccessoriesProps;
-};
-
-/**
- * Render function type for displaying each body part.
- */
-export type RenderFunction<Props extends AvatarPartProps[AvatarPart]> = {
-  [key in AvatarPart]: React.ComponentType<Props>;
-};
-
-/**
- * Type definition for all avatar generator options.
- */
-type AvatarGeneratorConfigOptions = {
-  /**
-   * Key is the body part
-   */
-  [key in AvatarPart]: {
-    /**
-     * Preset of colors available for the part.
-     */
-    colors?: string[];
-    /**
-     * Default color set when the editor is first loaded.
-     */
-    defaultColor?: string;
-    /**
-     * Neutral color used to display all styles available for the part.
-     */
-    neutralColor: string;
-    /**
-     * Available styles for the part.
-     */
-    styles: AvatarPartStyles[key][];
-    /**
-     * Default style for the part when the editor is first loaded.
-     */
-    defaultStyle: AvatarPartStyles[key];
-    /**
-     * Allows the user to not have this part as an option.
-     */
-    allowNull: boolean;
-    /**
-     * React component used to render this part.
-     */
-    render: RenderFunction<AvatarPartProps[key]>[key];
-  };
-};
-
-/**
- * Type definition for how the avatar config is stored.
- */
-type AvatarConfig = {
-  [key in AvatarPart]: {
-    color: string;
-    style: AvatarPartStyles[key];
-  };
-};
-
-const configOptions: AvatarGeneratorConfigOptions = {
-  [AvatarPart.FACE]: {
-    colors: ["#eed6cb", "#e6c3b3", "#d29779", "#c06a3f", "#864a2d", "#4d2a1a"],
-    defaultColor: "#d29779",
-    neutralColor: "#8E8E8E",
-    styles: Object.values(FaceStyle),
-    defaultStyle: Object.values(FaceStyle)[0],
-    allowNull: false,
-    render: Face,
-  },
-  [AvatarPart.EYES]: {
-    colors: ["#475676", "#7f8e91", "#515055", "#54513e", "#5a381c", "#19110f"],
-    defaultColor: "#54513e",
-    neutralColor: "#444444",
-    styles: Object.values(EyesStyle),
-    defaultStyle: Object.values(EyesStyle)[0],
-    allowNull: false,
-    render: Eyes,
-  },
-  [AvatarPart.BROWS]: {
-    neutralColor: "#444444",
-    styles: Object.values(BrowsStyle),
-    defaultStyle: Object.values(BrowsStyle)[0],
-    allowNull: false,
-    render: Brows,
-  },
-  [AvatarPart.MOUTH]: {
-    neutralColor: "#444444",
-    styles: Object.values(MouthStyle),
-    defaultStyle: Object.values(MouthStyle)[0],
-    allowNull: false,
-    render: Mouth,
-  },
-  [AvatarPart.NOSE]: {
-    neutralColor: "#444444",
-    styles: Object.values(NoseStyle),
-    defaultStyle: Object.values(NoseStyle)[0],
-    allowNull: false,
-    render: Nose,
-  },
-  [AvatarPart.EAR]: {
-    neutralColor: "#444444",
-    styles: Object.values(EarStyle),
-    defaultStyle: Object.values(EarStyle)[0],
-    allowNull: false,
-    render: Ear,
-  },
-  [AvatarPart.HAIR]: {
-    colors: ["#FDFAF3", "#F2E39F", "#D87436", "#9F4112", "#4F2210", "#2d241c"],
-    defaultColor: "#2d241c",
-    neutralColor: "#444444",
-    styles: Object.values(HairStyle),
-    defaultStyle: Object.values(HairStyle)[0],
-    allowNull: true,
-    render: Hair,
-  },
-  [AvatarPart.FACIAL_HAIR]: {
-    neutralColor: "#444444",
-    styles: Object.values(FacialHairStyle),
-    defaultStyle: null,
-    allowNull: true,
-    render: FacialHair,
-  },
-  [AvatarPart.ACCESSORIES]: {
-    neutralColor: "#444444",
-    styles: Object.values(AccessoriesStyle),
-    defaultStyle: null,
-    allowNull: true,
-    render: Accessories,
-  },
-};
+import { randomizeAvatarConfig } from "@/lib/avatar-config-randomizer";
+import {
+  AvatarConfig,
+  AvatarPart,
+  AvatarPartStyles,
+  AspectRatioOption,
+} from "@/App.types";
+import { configOptions } from "@/lib/config";
 
 const tabs: { name: string; value: string }[] = [
   { name: "Face", value: "face" },
@@ -434,6 +240,12 @@ function App() {
     },
   };
 
+  const randomizeAvatar = () => {
+    const randomConfig = randomizeAvatarConfig();
+
+    setConfig(randomConfig);
+  };
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="container max-w-screen-xl my-10">
@@ -534,7 +346,9 @@ function App() {
 
           <div className="order-0 sm:order-2 sm:col-span-2 grid grid-cols-5 gap-2 @container">
             <Button
-              onClick={() => {}}
+              onClick={() => {
+                randomizeAvatar();
+              }}
               className="col-span-2 text-xs @xs:text-sm @sm:text-lg"
               variant="colorful"
             >
